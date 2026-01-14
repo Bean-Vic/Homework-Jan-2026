@@ -1,0 +1,8 @@
+
+# IDE
+.idea/
+*.iml
+
+# Dependencies
+node_modules/
+

@@ -1,0 +1,15 @@
+{
+  "name": "homework-jan-2026",
+  "version": "1.0.0",
+  "description": "每次作业提交请通过 **Pull Request (PR)** 完成，并遵循以下规则：",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "prettier": "^3.7.4"
+  }
+}
