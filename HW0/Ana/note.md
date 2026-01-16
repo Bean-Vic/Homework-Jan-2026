@@ -5,8 +5,8 @@ git pull is a combination of two commands: git fetch +  git merge
 Q2. What is the difference between git merge and git rebase? Pro and Cons?
 git merge and git rebase both integrate changes from one Git branch into another.
 Git merge combines branches by creating a new merge commit that preserves the full history of both branches.
-Pros: It is safe, does not rewrite commit history, and clearly shows when branches were merged.
-Cons: It can create extra merge commits, making the commit history more cluttered and harder to read.
+Pros: safe, does not rewrite commit history
+Cons: create extra merge commits, making the commit history more cluttered and harder to read.
 
 Git rebase moves or reapplies commits from one branch on top of another, creating a linear commit history.
 Pros: It results in a cleaner, more readable history without merge commits.
