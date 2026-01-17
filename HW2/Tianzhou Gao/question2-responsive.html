@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Responsive Name Card</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            'page-bg': '#f0f2f5',
+            'btn-blue': '#007bff',
+            'btn-blue-hover': '#0056b3',
+          },
+          fontFamily: {
+            sans: ['sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+</head>
+<body class="bg-page-bg font-sans min-h-screen flex items-center justify-center p-4">
+
+  <div class="bg-white rounded-xl shadow-lg p-6 sm:p-8 flex flex-col sm:flex-row items-center max-w-lg w-full transition-all duration-300">
+    
+    <div class="flex-shrink-0 mb-4 sm:mb-0 sm:mr-6">
+      <img 
+        class="w-24 h-24 rounded-full transition-transform duration-300 transform hover:scale-110 object-cover" 
+        src="https://i.pravatar.cc/80" 
+        alt="Jane Doe"
+      >
+    </div>
+
+    <div class="flex-grow mb-6 sm:mb-0 text-center sm:text-left">
+      <h2 class="text-2xl font-bold text-gray-900">Jane Doe</h2>
+      <p class="text-gray-600">Front-end Engineer</p>
+    </div>
+
+    <div class="flex-shrink-0 w-full sm:w-auto">
+      <button class="bg-btn-blue text-white w-full sm:w-auto px-6 py-2 rounded-md font-medium transition-colors duration-300 hover:bg-btn-blue-hover cursor-pointer focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2">
+        Follow
+      </button>
+    </div>
+
+  </div>
+
+</body>
+</html>
