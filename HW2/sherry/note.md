@@ -84,9 +84,11 @@ Common flex container properties include **`flex-direction`** , which controls t
 
 ## 14. What is responsive web design? How do we achieve this?
 
-**Responsive web design** means a website **adapts to different screen sizes and devices** . We achieve this mainly by using **media queries** , **flexible layouts with Flexbox or Grid** , and **relative units** like **`%`** , **`rem`** , and **`vw`** instead of fixed pixels.
+Responsive web design is a design approach that uses HTML and CSS to make the **UI look great** on all devices and screen sizes. It allows layouts to adapt to smaller screens, often using vertical scrolling.
 
-The goal is to provide a **consistent user experience** across mobile, tablet, and desktop.
+To achieve this, wen can use **Mobile-first approach** , like designing for mobile devices before any other devices. Layout should be change from single-column to multi-column. We can also utilized **viewport** from `<meta>` for page to recognize device size.
+
+Some implements can be using the **Flexbox and Grid** to define the layout, using **`<picture>`** to provide multiple `<source>` elements, using **`@media` query** to define the different layout or style for different size of screen and set the min/max length. font-size and so on
 
 > W3School CSS Quiz
 
