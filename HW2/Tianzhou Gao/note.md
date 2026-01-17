@@ -70,3 +70,5 @@ The child element will take up the available width of the parent, so its width w
 
 ## 16. What is responsive web design? How do we achieve this? 
 Responsive web design means building websites that work well on all screen sizes. We achieve this using flexible layouts, media queries, responsive units, and modern layout systems like Flexbox and Grid.
+
+![css quiz](/HW2/Tianzhou%20Gao/css%20quiz.png)
