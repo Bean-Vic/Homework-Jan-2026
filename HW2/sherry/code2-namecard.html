@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Name Carcd</title>
+    <style>
+      body {
+        background-color: #f0f2f5;
+        font-family: sans-serif;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        min-height: 100vh;
+        margin: 0;
+      }
+      .card {
+        border: 0.125rem solid #efeff0;
+        background-color: #fff;
+        border-radius: 0.625rem;
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        padding: 1rem;
+      }
+      .follow-btn {
+        background-color: #007bff;
+        color: #fff;
+        border-radius: 0.5rem;
+        border: none;
+        transition: transform 0.3s ease;
+        padding: 0.625rem 1rem;
+        display: flex;
+        cursor: pointer;
+        justify-content: center;
+        align-items: center;
+      }
+      .follow-btn:hover {
+        background-color: #0056b3;
+      }
+      .avatar-img {
+        border-radius: 50%;
+        width: 3.75rem;
+        transition: transform 0.3s ease;
+      }
+      .avatar-img:hover {
+        transform: scale(1.2);
+      }
+      .title p {
+        margin: 0.25rem 0;
+      }
+      .title p:last-child {
+        font-size: 0.75rem;
+        color: gray;
+      }
+      @media (max-width: 768px) {
+        .card {
+          flex-direction: column;
+          text-align: center;
+          width: 80%;
+        }
+        .follow-btn {
+          width: 60%;
+          align-self: center;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="card">
+      <img class="avatar-img" src="https://i.pravatar.cc/80" alt="avatar" />
+      <div class="title">
+        <p><strong>Jane Doe</strong></p>
+        <p>Front-end Engineer</p>
+      </div>
+      <button class="follow-btn">Follow</button>
+    </div>
+  </body>
+</html>
