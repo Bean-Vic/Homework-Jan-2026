@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Longest Substring Calculator</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f4f4f9;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+        }
+
+        .container {
+            background: white;
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            width: 400px;
+            text-align: center;
+        }
+
+        h2 { color: #333; margin-bottom: 1.5rem; }
+
+        .input-group {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            align-items: flex-start;
+            margin-bottom: 20px;
+        }
+
+        label { font-weight: bold; color: #555; }
+
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 2px solid #ddd;
+            border-radius: 6px;
+            font-size: 16px;
+            box-sizing: border-box;
+        }
+
+        input:focus {
+            border-color: #007bff;
+            outline: none;
+        }
+
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 16px;
+            width: 100%;
+            transition: background 0.2s;
+        }
+
+        button:hover { background-color: #0056b3; }
+
+        #result-area {
+            margin-top: 20px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 6px;
+            display: none;
+            text-align: left;
+        }
+
+        .result-label { font-weight: bold; color: #333; }
+        .result-value { color: #007bff; font-size: 1.2em; font-weight: bold;}
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h2>Substring Calculator</h2>
+    
+    <div class="input-group">
+        <label for="inputString">Enter String (s):</label>
+        <input type="text" id="inputString" placeholder="e.g. abcabcbb">
+    </div>
+
+    <button id="submitBtn">Calculate Longest Substring</button>
+
+    <div id="result-area">
+        <div><span class="result-label">Max Length: </span> <span id="lengthOutput" class="result-value">0</span></div>
+        <div style="margin-top: 5px; font-size: 0.9em; color: #666;">
+            (Calculated for input: "<span id="inputRef"></span>")
+        </div>
+    </div>
+</div>
+
+<script>
+    function lengthOfLongestSubstring(s) {
+        let maxLen = 0;
+        let start = 0;
+        const charIndexMap = new Map();
+
+        for (let end = 0; end < s.length; end++) {
+            const currentChar = s[end];
+
+            if (charIndexMap.has(currentChar) && charIndexMap.get(currentChar) >= start) {
+                start = charIndexMap.get(currentChar) + 1;
+            }
+
+            charIndexMap.set(currentChar, end);
+            maxLen = Math.max(maxLen, end - start + 1);
+        }
+
+        return maxLen;
+    }
+
+    const submitBtn = document.getElementById('submitBtn');
+    const inputElement = document.getElementById('inputString');
+    const resultArea = document.getElementById('result-area');
+    const lengthOutput = document.getElementById('lengthOutput');
+    const inputRef = document.getElementById('inputRef');
+
+    submitBtn.addEventListener('click', () => {
+        const userInput = inputElement.value;
+        const result = lengthOfLongestSubstring(userInput);
+
+        lengthOutput.textContent = result;
+        inputRef.textContent = userInput;
+        
+        resultArea.style.display = 'block';
+    });
+</script>
+
+</body>
+</html>

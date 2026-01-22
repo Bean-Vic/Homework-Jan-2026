@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<style>
+  body {
+    font-family: sans-serif;
+  }
+
+  .tab-buttons {
+    overflow: hidden;
+    border: 1px solid #ccc;
+    background-color: #f1f1f1;
+  }
+
+  .tab-buttons button {
+    background-color: inherit;
+    float: left;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    padding: 14px 16px;
+    transition: 0.3s;
+    font-size: 17px;
+  }
+
+  .tab-buttons button:hover {
+    background-color: #ddd;
+  }
+
+  .tab-buttons button.active {
+    background-color: #ccc;
+  }
+
+  .tab-content {
+    display: none; 
+    padding: 6px 12px;
+    border: 1px solid #ccc;
+    border-top: none;
+  }
+
+  .show {
+    display: block;
+  }
+</style>
+</head>
+<body>
+
+<div class="tab-buttons">
+  <button data-target="London">London</button>
+  <button data-target="Paris">Paris</button>
+  <button data-target="Tokyo">Tokyo</button>
+</div>
+
+<div id="London" class="tab-content">
+  <h2>London</h2>
+  <p>London is the capital city of England</p>
+</div>
+
+<div id="Paris" class="tab-content">
+  <h2>Paris</h2>
+  <p>Paris is the capital of France.</p>
+</div>
+
+<div id="Tokyo" class="tab-content">
+  <h2>Tokyo</h2>
+  <p>Tokyo is the capital of Japan.</p>
+</div>
+
+<script>
+  const buttonContainer = document.querySelector('.tab-buttons');
+  const allButtons = document.querySelectorAll('.tab-buttons button');
+  const allContent = document.querySelectorAll('.tab-content');
+
+  document.querySelector('button[data-target="London"]').classList.add('active');
+  document.getElementById('London').classList.add('show');
+
+  buttonContainer.addEventListener('click', (event) => {
+    const clickedBtn = event.target;
+
+    if (clickedBtn.tagName !== 'BUTTON') return;
+
+    allButtons.forEach(btn => {
+      btn.classList.toggle('active', btn === clickedBtn);
+    });
+
+    const targetId = clickedBtn.getAttribute('data-target');
+    
+    allContent.forEach(content => {
+      content.classList.toggle('show', content.id === targetId);
+    });
+  });
+</script>
+
+</body>
+</html>
