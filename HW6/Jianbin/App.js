@@ -1,7 +1,3 @@
-import React from "react";
-import Counter from "./Counter";
-import ShoppingCart from "./ShoppingCart";
-
 function App() {
   return (
     <div>
@@ -12,4 +8,4 @@ function App() {
   );
 }
 
-export default App;
+ReactDOM.render(<App />, document.getElementById("root"));
