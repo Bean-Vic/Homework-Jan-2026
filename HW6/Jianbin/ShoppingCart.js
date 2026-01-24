@@ -1,35 +1,17 @@
-import React, { useState } from "react";
-
-const products = [
-  { name: "Product A", price: 15 },
-  { name: "Product B", price: 20 },
-  { name: "Product C", price: 10 },
-];
-
 function ShoppingCart() {
-  const [selected, setSelected] = useState(products[0]);
-  const [qty, setQty] = useState(1);
-  const [cart, setCart] = useState([]);
+  const products = [
+    { name: "Product A", price: 15 },
+    { name: "Product B", price: 20 },
+    { name: "Product C", price: 10 },
+  ];
+
+  const [selected, setSelected] = React.useState(products[0]);
+  const [qty, setQty] = React.useState(1);
+  const [cart, setCart] = React.useState([]);
 
   const addToCart = () => {
-    setCart([
-      ...cart,
-      {
-        name: selected.name,
-        price: selected.price,
-        quantity: qty,
-      },
-    ]);
+    setCart([...cart, { ...selected, quantity: qty }]);
   };
-
-  const removeItem = (index) => {
-    setCart(cart.filter((_, i) => i !== index));
-  };
-
-  const total = cart.reduce(
-    (sum, item) => sum + item.price * item.quantity,
-    0
-  );
 
   return (
     <div>
@@ -63,27 +45,19 @@ function ShoppingCart() {
             <th>Price</th>
             <th>Qty</th>
             <th>Total</th>
-            <th>Action</th>
           </tr>
         </thead>
         <tbody>
-          {cart.map((item, index) => (
-            <tr key={index}>
+          {cart.map((item, i) => (
+            <tr key={i}>
               <td>{item.name}</td>
               <td>${item.price}</td>
               <td>{item.quantity}</td>
               <td>${item.price * item.quantity}</td>
-              <td>
-                <button onClick={() => removeItem(index)}>Remove</button>
-              </td>
             </tr>
           ))}
         </tbody>
       </table>
-
-      <h3>Total: ${total}</h3>
     </div>
   );
 }
-
-export default ShoppingCart;
