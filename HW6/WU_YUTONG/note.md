@@ -3,7 +3,7 @@
 
 ## 1. What is a SPA?
 SPA stands for Single Page Application.  
-It is a web application that loads once and then updates the page dynamically without refreshing, like Gmail or Google Maps.
+It is a web application that is opened once and then updates the page dynamically without refreshing.
 
 ---
 
