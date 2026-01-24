@@ -50,7 +50,9 @@ A **SPA (Single Page Application)** is a **web app that loads one HTML page once
 
 In React, a **controlled component** is a form element whose **value is fully managed by React state**. The component’s `value` prop comes from state, and `onChange` updates the state, making React the **single source of truth**. 
 
-An **uncontrolled component**, on the other hand, stores its state in the **DOM itself**, and you access the value using a **ref**. Controlled components offer **better validation and synchronization**, while uncontrolled ones are **simpler** and closer to native HTML.
+An **uncontrolled component**, on the other hand, stores its state in the **DOM itself**, and you access the value using a **ref**. 
+
+Controlled components offer **better validation and synchronization**, while uncontrolled ones are **simpler** and closer to native HTML.
 
 
 
@@ -108,6 +110,8 @@ During **mounting**, lifecycle methods are used to **fetch data** and **set up s
 ## 14. What are synthetic events and how are they different than DOM events?
 
 **Synthetic events** are **React’s normalized wrapper around native DOM events**, designed to provide a **consistent cross-browser API**. They are handled through **event delegation**, where React attaches a **single event listener at the root**, improving **performance and memory efficiency**. At the same time, synthetic events still **expose the underlying native DOM event** when direct access is needed.
+
+
 
 ## 15. List some common events that you used most
 

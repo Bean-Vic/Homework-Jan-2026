@@ -1,0 +1,50 @@
+.App {
+  font-family: sans-serif;
+  text-align: center;
+}
+
+.app {
+  display: flex;
+  flex-direction: column;
+  width: 600px;
+  justify-content: center;
+  align-items: center;
+}
+.content {
+  border: 1px solid black;
+  border-radius: 5px;
+}
+
+.total {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-weight: bold;
+  border-top: 1px solid black;
+  padding: 10px;
+}
+
+.input {
+  padding: 10px;
+  border-bottom: 1px solid black;
+  display: flex;
+  gap: 10px;
+}
+input {
+  width: 40px;
+}
+
+select {
+  width: 120px;
+}
+
+.cart {
+  padding: 0px 10px 10px 10px;
+}
+
+.cart-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 5px;
+}
