@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HW5 - List and Search</title>
+  <link rel="stylesheet" href="question1.css">
+</head>
+<body>
+  <!-- Part 1  -->
+  <section>
+    <h2>Part 1</h2>
+    <button id="load-User-Btn">Load Users</button>
+    <table>
+      <thead>
+        <tr>
+          <th>ID</th>
+          <th>Name</th>
+          <th>Email</th>
+          <th>City</th>
+        </tr>
+      </thead>
+
+      <tbody id="table-body"></tbody>
+    </table>
+    <!-- Handle error    -->
+    <p id="user-error" class="error"></p>
+  </section>
+
+  <!--Part 2-->
+  <section>
+    <h2>Part 2</h2>
+    <input type="text" id="user-id-input" placeholder="Enter User ID">
+    <button id="search-user-btn">Search</button>
+    <!-- Error Handle -->
+    <p id="search-error" class="error"></p>
+
+    <h3>User Info</h3>
+    <ul id="user-info"></ul>
+
+    <h3>User Posts</h3>
+    <ul id="user-post"></ul>
+
+    <h3>User Todos</h3>
+    <ul id="user-todo"></ul>
+  </section>
+
+  <!--Part 3-->
+  <section>
+    <h2>Part 3</h2>
+    <button id="delayed-btn"> Send Delayed Request</button>
+    <p id="delayed-status"></p>
+  </section>
+
+  <script src="question1.js"></script>
+</body>
+</html>
