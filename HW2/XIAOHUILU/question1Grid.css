@@ -1,0 +1,39 @@
+html, body{
+    height: 100%;
+    margin:0;
+}
+.header {
+  background-color: #97c21f;
+}
+
+.nav {
+  background-color: #f3f6da;   
+}
+
+.article {
+  background-color: white;
+}
+
+.aside {
+  background-color: #f3f6da; 
+}
+.footer {
+  background-color: yellow;
+}
+.header, .nav, .article, .aside, .footer{
+  padding: 20px;
+}
+.grid{
+    height:100%;
+    display: grid;
+    grid-template-columns: 20% 60% 20%;
+    grid-template-rows: 20% 70% 10%;
+}
+
+.header{
+    grid-column:1/4;
+}
+
+.footer{
+  grid-column: 1 / 4;
+}
