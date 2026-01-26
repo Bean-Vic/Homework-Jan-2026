@@ -42,7 +42,7 @@ By default, child components also re-render when the parent re-renders, unless o
 7. What is a state, and how do you update it? Can you mutate it directly?
 
 State is data managed by a component that determines how it renders.
-You update state using setState (class) or setState from useState (hooks).
+You update state using setState (class) or useState (hooks).
 You should never mutate state directly.
 
 8. What is the difference between a controlled component and uncontrolled component?
@@ -199,7 +199,7 @@ Unlike native DOM events, synthetic events are pooled and normalized, and they u
 
 15. List some common events that you used most
 
-onclick onchange
+onClick onChange onSubmit
 
 16. How do React handle errors?
 
