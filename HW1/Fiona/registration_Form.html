@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registration Form</title>
+  <!--stying for workshop schedule table. it will change from double border to single line boarder   -->
+  <style>
+    /* to make sure the table is single line border, not double line */
+    table, th, td {
+      border: 2px solid black;   /* table, table head and body are single line */
+      border-collapse: collapse; /* collapse the line of cells */
+    }
+    th, td {
+      padding: 8px;
+    }
+  </style>
+
+</head>
+<body>
+  <!-- <form> is used to collect user input data and submit data to backend via Get or Post -->
+  <form action="#" method="post" style="border: 5px solid black; padding: 20px; max-width: 800px; margin: 0 auto;">
+    <h1>Community Workshop Registration</h1>
+    <p>
+      <em>Note: Please submit this form at least 14 days before your chosen session.</em>
+    </p>
+
+    <!--    ** 1st session - Personal details **
+      For each set of label and input tag:
+       1. label for and input id must match, it tells browser they are a pair
+       2. the input name is the variable passed to the backend.
+       3. input value is the data assign to the variable name.
+
+      Single selection - Gender section:
+        set type="radio" for single selection.
+        the input name must be the same, which is "gender", so you can only assign one value from the 3 choices.
+        Once you choose one, the previous value will be replaced by the new one.  (mutual exclusion)
+        use break to force a new line btw each choice.
+    -->
+    <fieldset>
+      <legend>Personal Details</legend>
+      <p>
+        <label for="name">Name:</label>
+        <input type="text" placeholder="Your Full Name" name="name" id="name" required />
+      </p>
+
+      <p>
+        <label for="address">Address:</label>
+        <input type="text" placeholder="Street, City, State" id="address" name="address" required />
+      </p>
+
+      <p>
+        <label for="email">Email:</label>
+        <input type="email" placeholder="you@example.com" id="email" name="email" />
+      </p>
+      
+      <p>
+        <label for="phoneNumber">Phone Number:</label>
+        <input type="tel" placeholder="123-456-7890" id="phoneNumber" name="phoneNumber">
+      </p>
+
+      <p>
+        <label for="age">Age:</label>
+        <input type="number" placeholder="0" id="age" name="age" style="width:30px">
+      </p>
+
+      <p>
+        Gender: <br>
+        <input type="radio" id="male" name="gender" value="male">
+        <label for="male">Male</label> <br>
+
+        <input type="radio" id="female" name="gender" value="female">
+        <label for="female">Female</label> <br>
+
+        <input type="radio" id="other" name="gender" value="Other">
+        <label for="other">Other</label>
+      </p>
+    </fieldset>
+
+    <!--    ** 2nd session - Workshop preference **
+    Dropdown menu - T-shirt size & experience level:
+     1. use select with option.
+     2. label for and select id must match
+
+    Multiple choice - check all apply:
+     set type="checkbox" for multiple selection.
+    -->
+    <fieldset>
+      <legend>Workshop Preference</legend>
+      <p>
+      <label for="date">Preferred Session Date</label>
+      <input type="date" id="date" name="date">
+      </p>
+
+      <p>
+        <label for="shirtSize">T-shirt Size</label>
+        <select id="shirtSize" name="shirtSize">
+          <option value="">Select size</option>
+          <option value="small">Small</option>
+          <option value="medium">Medium</option>
+          <option value="large">Large</option>
+          <option value="x-large">X-large</option>
+        </select>
+      </p>
+
+      <p>
+        <label for="level"> Experience Level</label>
+        <select name="level" id="level">
+          <option value="">Select level</option>
+          <option value="beginner">Beginner</option>
+          <option value="intermediate">Intermediate</option>
+          <option value="advanced">Advanced</option>
+        </select>
+      </p>
+
+      <p>
+        Check all that apply: <br>
+        <input type="checkbox" id="veg" name="veg" value="Veg">
+        <label for="veg">Vegetarian</label> <br>
+        <input type="checkbox" id="special" name="special" value="special">
+        <label for="special">Required special assistance</label> <br>
+        <input type="checkbox" id="pre" name="pre" value="pre">
+        <label for="pre">Have previous workshop experience</label> <br>
+        <input type="checkbox" id="wkday" name="wkday" value="wkday">
+        <label for="wkday">Available on weekdays</label> <br>
+        <input type="checkbox" id="wkend" name="wkend" value="wkend">
+        <label for="wkend">Available on weekends</label> <br>
+      </p>
+    </fieldset>
+
+    <!--    ** 3rd session - Additional Information **
+      Use textarea instead of input for large text data collection.
+      set input type = "file" for file upload, also add "multiple" if you want to allow upload multiple file.
+    -->
+    <fieldset>
+      <legend>Additional Information</legend>
+      <p>
+        <label for="reason">Why are you interested in this workshop?</label> <br>
+        <textarea name="reason" id="reason" cols="50" rows="4" placeholder="Tell us in 50 words or more"></textarea>
+      </p>
+
+      <p>
+        <label for="skill">List any relevant skills or experience</label> <br>
+        <textarea name="skill" id="skill" cols="50" rows="4" placeholder="e.g., woodworking, painting, coding"
+        ></textarea>
+      </p>
+
+      <p>
+        <label for="proof">Upload Proof of Residency & ID:</label>
+        <input type="file" id="proof" name="proof" multiple>
+      </p>
+    </fieldset>
+
+    <!--    ** 4th session - Workshop schedule **
+      table > thead/tbody > tr > th/td
+      1. the first row
+        thead - the rows holds the title of col, no data info.
+        tr - table row
+        th - table header, default bold
+      2. row 2 - row 5
+      tbody - the general cells that hold data
+      td - table data, the general cells for data
+      3. caption tag - make the table title to center above the table, no matter the width of table.
+    -->
+    <hr>
+    <h3>Available Workshop Sessions</h3>
+    <table>
+      <caption>
+        June 2025 Workshop Schedule
+      </caption>
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Time</th>
+          <th>Topic</th>
+        </tr>
+      </thead>
+      <tbody>
+       <tr>
+         <td>June 3, 2025</td>
+         <td>10:00 AM - 1:00 pm</td>
+         <td>Introduction to Pottery</td>
+       </tr>
+       <tr>
+         <td>June 10, 2025</td>
+         <td>2:00 PM - 5:00 PM</td>
+         <td>Basic Woodworking</td>
+       </tr>
+       <tr>
+         <td>June 17,2025</td>
+         <td>9:00 AM - 12:00 PM</td>
+         <td>Watercolor Painting</td>
+       </tr>
+       <tr>
+         <td>June 24, 2025</td>
+         <td>1:00 PM - 4:00 PM</td>
+         <td>Intro to Coding</td>
+       </tr>
+      </tbody>
+    </table>
+    <hr>
+    <!--    ** link session **    -->
+    <p>
+      <a href="https://example.com/" target="_blank" rel="noreferrer nofollow">
+        Visit our Community Hub
+      </a>
+    </p>
+    <hr>
+    <!--   ** Button to submit form **    -->
+    <p>
+      <button type="submit">Submit Registration</button>
+    </p>
+  </form>
+</body>
+</html>
