@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HW4 JS2</title>
+    <style>
+      /* Basic UI is fine (table) */
+      table {
+        border-collapse: collapse;
+        width: 100%;
+        margin: 16px 0;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: left;
+      }
+      th {
+        background: #f5f5f5;
+      }
+
+      /* Tabs: keep simple but close to common UI */
+      .tab-buttons button {
+        padding: 10px 14px;
+        border: 1px solid #ccc;
+        background: #f3f3f3;
+        cursor: pointer;
+        margin-right: 6px;
+      }
+      .tab-buttons button.active {
+        background: #2196f3;
+        color: white;
+        border-color: #2196f3;
+      }
+      .tab-content {
+        border: 1px solid #ccc;
+        padding: 12px;
+        margin-top: 10px;
+      }
+      .hidden {
+        display: none;
+      }
+    </style>
+  </head>
+
+  <body>
+    <h1>HW4 - JavaScript 2</h1>
+
+    <h2>2.1 Dynamic Table</h2>
+    <div id="table-root"></div>
+
+    <hr />
+
+    <h2>2.2 Tabs (Event Delegation Preferred)</h2>
+
+    <!-- Buttons -->
+    <div class="tab-buttons" id="tabButtons">
+      <button type="button">London</button>
+      <button type="button">Paris</button>
+      <button type="button">Tokyo</button>
+    </div>
+
+    <!-- Contents -->
+    <div class="tab-content" data-tab="London">
+      <h2>London</h2>
+      <p>London is the capital city of England</p>
+    </div>
+
+    <div class="tab-content" data-tab="Paris">
+      <h2>Paris</h2>
+      <p>Paris is the capital of France.</p>
+    </div>
+
+    <div class="tab-content" data-tab="Tokyo">
+      <h2>Tokyo</h2>
+      <p>Tokyo is the capital of Japan.</p>
+    </div>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
