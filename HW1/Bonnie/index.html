@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Registration Form</title>
+</head>
+<body>
+  <h1>Registration Form</h1>
+
+  <form action="#" method="post" enctype="multipart/form-data">
+    <fieldset>
+      <legend>Basic Information</legend>
+
+      <p>
+        <label for="fullName">Full Name:</label><br />
+        <input type="text" id="fullName" name="fullName" required />
+      </p>
+
+      <p>
+        <label for="email">Email:</label><br />
+        <input type="email" id="email" name="email" required />
+      </p>
+
+      <p>
+        <label for="phone">Phone:</label><br />
+        <input type="tel" id="phone" name="phone" />
+      </p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Session</legend>
+
+      <p>
+        <label for="sessionDate">Preferred Session Date:</label><br />
+        <input type="date" id="sessionDate" name="sessionDate" required />
+      </p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Choices</legend>
+
+      <p>
+        <label for="tshirtSize">T-shirt Size:</label><br />
+        <select id="tshirtSize" name="tshirtSize" required>
+          <option value="">-- Select a size --</option>
+          <option value="Small">Small</option>
+          <option value="Medium">Medium</option>
+          <option value="Large">Large</option>
+          <option value="X-large">X-large</option>
+        </select>
+      </p>
+
+      <p>Experience Level:</p>
+      <p>
+        <input type="radio" id="beginner" name="experience" value="Beginner" required />
+        <label for="beginner">Beginner</label><br />
+
+        <input type="radio" id="intermediate" name="experience" value="Intermediate" />
+        <label for="intermediate">Intermediate</label><br />
+
+        <input type="radio" id="advanced" name="experience" value="Advanced" />
+        <label for="advanced">Advanced</label>
+      </p>
+    </fieldset>
+
+    <fieldset>
+      <legend>Upload</legend>
+
+      <p>
+        <label for="uploadFile">Upload a file:</label><br />
+        <input type="file" id="uploadFile" name="uploadFile" />
+      </p>
+    </fieldset>
+
+    <p>
+      <a href="https://example.com/" target="_blank" rel="noopener noreferrer">
+        Visit our Community Hub
+      </a>
+    </p>
+
+    <p>
+      <button type="submit">Submit</button>
+      <button type="reset">Reset</button>
+    </p>
+  </form>
+</body>
+</html>
