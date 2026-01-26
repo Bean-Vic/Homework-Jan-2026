@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+}
+
+body {
+    margin: 0;
+    padding: 20px 10px;
+    font-family: Arial, Helvetica, sans-serif;
+    background: #fff;
+    color: #222;
+}
+
+h2 {
+    margin: 0 0 14px;
+    font-weight: 700;
+}
+
+section {
+    max-width: 900px;
+    margin: 0 auto 20px;
+    padding: 20px;
+    border: 1px solid darkgrey;
+    border-radius: 8px;
+    background: whitesmoke;
+}
+
+button {
+    padding: 10px 14px;
+    border: 1px solid darkgrey;
+    border-radius: 4px;
+    background: #f7f7f7;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button:active {
+    transform: translateY(1px);
+}
+
+input[type="text"] {
+    width: 280px;
+    padding: 10px;
+    border: 1px solid darkgrey;
+    border-radius: 4px;
+    font-size: 14px;
+    margin-right: 10px;
+}
+
+/* Part 2 alignment */
+#user-id-input,
+#search-user-btn {
+    vertical-align: middle;
+}
+
+/* Part 1 */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 10px;
+    background: white;
+}
+
+thead th {
+    background: darkgrey;
+    font-weight: 700;
+    border: 1px solid dimgrey;
+}
+
+th, td {
+    border: 1px solid darkgrey;
+    padding: 10px 10px;
+    text-align: center;
+}
+
+/* Part 2 */
+ul {
+    margin: 10px 0 18px;
+    padding-left: 20px;
+}
+
+li {
+    margin: 6px 0;
+    line-height: 1.35;
+}
+
+#user-post li {
+    margin-bottom: 12px;
+}
+
+#user-todo li {
+    margin: 4px 0;
+}
+
+.error {
+    color: #d93025;
+    margin-top: 10px;
+}
+
+/* Part 3 */
+#delayed-status {
+    margin-top: 12px;
+    font-weight: 600;
+}
