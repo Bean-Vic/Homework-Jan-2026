@@ -1,0 +1,50 @@
+* {
+    box-sizing: border-box;
+}
+
+.wrapper {
+    width: 50%;
+    margin: 10px auto;
+    border: 2px solid #cfcfcf;
+    font-family: Arial, sans-serif;
+    background-color: white;
+}
+
+.tab-bar {
+    display: flex;
+    border-bottom: 2px solid #cfcfcf;
+    background-color: #f5f5f5;
+}
+
+.tab {
+    border: none;
+    background: transparent;
+    padding: 20px 30px;
+    font-size: 25px;
+    cursor: pointer;
+}
+
+.tab.active {
+    background: #d2d2d2
+}
+
+.panel {
+    background: #fff;
+    padding: 40px 30px 70px;
+    display: none;
+}
+
+.panel.active {
+    display: block;
+}
+
+.panel h2{
+    font-size: 30px;
+    margin:0 0 40px;
+    font-weight:800;
+}
+
+.panel p{
+    font-size: 20px;
+    margin: 0;
+}
