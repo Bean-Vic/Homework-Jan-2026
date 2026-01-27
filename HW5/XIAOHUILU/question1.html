@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="question1.css">
+    <title>FetchAPI</title>
+</head>
+<body>
+  <main class="page">
+    <div class="card">
+
+      <!-- Part 1 -->
+      <section class="section">
+        <h2>Part 1</h2>
+        <button id="fetchButton" class="btn">Load Users</button>
+
+        <table class="table" id="usersTable">
+          <thead>
+            <tr>
+              <th>ID</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>City</th>
+            </tr>
+          </thead>
+          <tbody id="output">
+            
+          </tbody>
+        </table>
+      </section>
+
+      <!-- Part 2 -->
+      <section class="section">
+        <h2>Part 2</h2>
+
+        <div class="row">
+          <input id="searchInput" class="input" type="text" placeholder="Enter User ID" />
+          <button id="fetchButton2" class="btn">Search</button>
+        </div>
+
+        <div class="subtitles">
+          <h3>User Info</h3>
+          <div id="userInfo"></div>
+
+          <h3>User Posts</h3>
+          <div id="userPosts"></div>
+
+          <h3>User Todos</h3>
+          <div id="userTodos"></div>
+        </div>
+      </section>
+
+      <!-- Part 3 -->
+      <section class="section">
+        <h2>Part 3</h2>
+        <button id="delayBtn">Send Delayed Request</button>
+        <div id="delayOutput"></div>
+      </section>
+
+      
+    </div>
+  </main>
+
+    <script src="question1.js"></script>   
+</body>
+</html>
