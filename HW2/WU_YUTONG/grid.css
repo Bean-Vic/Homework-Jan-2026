@@ -1,0 +1,33 @@
+
+.grid-container {
+  display: grid;                 
+  grid-template-columns: 1fr 3fr 1fr;  
+  grid-template-rows: 60px 180px 60px;
+}
+
+
+.header {
+  background-color: yellowgreen;
+  grid-column: 1 / 4;
+}
+
+.nav {
+  background-color: beige;
+}
+
+.article {
+  background-color: white;
+}
+
+.aside {
+  background-color: beige;
+}
+
+.footer {
+  background-color: yellow;
+  grid-column: 1 / 4;
+}
+
+
+
+
