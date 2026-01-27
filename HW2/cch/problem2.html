@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: #f0f2f5;
+      min-height: 100vh;
+    }
+    .card {
+      display: flex;
+      flex-direction: row;
+      background-color: #fff;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
+      gap: 16px; /* 各块之间间距 */
+      padding: 16px 20px;
+      align-items: center;
+      width: 320px;
+    }
+    .avatar {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      object-fit: cover;
+    }
+    .info {
+      display: flex;
+      flex-direction: column; /* 名字在上，职位在下 */
+      flex: 1; /* 把中间空间吃掉 */
+    }
+
+    .name {
+      font-weight: 700;
+      font-size: 18px;
+    }
+
+    .title {
+      color: #666;
+      font-size: 14px;
+    }
+    .btn {
+      padding: 8px 18px;
+      border-radius: 8px;
+
+      background: #1677ff; /* 主色 */
+      border: 1px solid #0f5ed7; /* 深一点的边框 */
+
+      color: #fff;
+      font-weight: 600;
+      font-size: 14px;
+
+      cursor: pointer;
+    }
+    @media (max-width: 768px) {
+      .card {
+        flex-direction: column;
+        width: 90%;
+        max-width: 420px;
+        padding: 24px 20px;
+      }
+      .info {
+        flex: none; /* 不再撑开 */
+        align-items: center;
+        margin-top: 8px;
+      }
+
+      .btn {
+        width: 100%; /* 按钮全宽 */
+        margin-top: 16px;
+      }
+    }
+  </style>
+  <body>
+    <div class="card">
+      <img class="avatar" src="https://i.pravatar.cc/80" />
+      <div class="info">
+        <div class="name">Jane Doe</div>
+        <div class="title">Front-end Engineer</div>
+      </div>
+      <button class="btn">Follow</button>
+    </div>
+  </body>
+</html>

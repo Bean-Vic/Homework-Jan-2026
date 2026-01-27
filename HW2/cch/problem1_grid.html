@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      grid-template-rows: auto 1fr auto;
+    }
+    header {
+      background-color: #a9cc44;
+      padding: clamp(12px, 3vw, 64px);
+    }
+    main {
+      display: grid;
+      grid-template-columns:
+        clamp(180px, 10vw, 280px)
+        1fr
+        clamp(180px, 10vw, 280px);
+      min-height: 0;
+    }
+    nav,
+    aside {
+      background-color: #f4f4d9;
+    }
+    p {
+      color: #7f7f7f;
+    }
+    footer {
+      background-color: #feff3b;
+      padding: clamp(8px, 2vw, 16px);
+    }
+  </style>
+  <body>
+    <header>
+      <p>Header</p>
+    </header>
+    <main>
+      <nav><p>Nav</p></nav>
+      <article>
+        <p>Article</p>
+      </article>
+      <aside>
+        <p>Aside</p>
+      </aside>
+    </main>
+    <footer>
+      <p>Footer</p>
+    </footer>
+  </body>
+</html>
