@@ -1,0 +1,41 @@
+* {
+    margin:0;
+    padding:0;
+    box-sizing: border-box;
+    color: grey;
+}
+
+body {
+    display: grid;
+    grid-template-rows: 2fr 5fr 1fr;
+}
+
+header {
+    background-color: #bce63e;
+    padding: 24px;
+    font-size: 25px;
+    font-color: white;
+}
+
+footer {
+    background-color: yellow;
+    padding: 24px;
+    font-size: 25px;
+}
+
+main {
+    display: grid;
+    grid-template-columns: 1fr 3fr 1fr;
+}
+
+nav, aside {
+    background: #f2f0d8;
+    padding: 24px;
+    font-size: 25px;
+}
+
+article {
+    background: white;
+    padding: 24px;
+    font-size: 25px;
+}
