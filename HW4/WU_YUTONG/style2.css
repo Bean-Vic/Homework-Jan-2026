@@ -1,0 +1,23 @@
+
+#tabs {
+  width: 600px;
+  border-width: 1px;
+  border-style: solid;
+  border-color: lightgrey;
+}
+
+#buttons {
+  background: white;
+}
+
+.tab.active {
+  background: lightgrey;
+}
+
+.panel {
+  display: none;
+}
+
+.panel.active {
+  display: block;
+}
