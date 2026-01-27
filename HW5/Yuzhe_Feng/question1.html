@@ -1,0 +1,209 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Product Management</title>
+
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+
+        color: #fff;
+        padding: 30px;
+      }
+
+      .container {
+        background: #fff;
+        color: #000;
+        width: 900px;
+        max-width: 100%;
+        margin: 0 auto;
+        padding: 30px;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 10px;
+      }
+
+      th,
+      td {
+        border: 1px solid #777;
+        padding: 10px;
+        text-align: center;
+      }
+
+      th {
+        font-weight: bold;
+      }
+
+      /* v). even rows darker background */
+      tbody tr:nth-child(even) {
+        background: #e9e9e9;
+      }
+
+      .delete-btn {
+        padding: 4px 10px;
+        border: 1px solid #999;
+        background: #f5f5f5;
+        cursor: pointer;
+      }
+
+      hr {
+        margin: 25px 0;
+      }
+
+      h2 {
+        margin: 0 0 15px;
+      }
+
+      .form-row {
+        display: flex;
+        gap: 25px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .field {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+      }
+
+      input {
+        width: 110px;
+        padding: 6px;
+        border: 1px solid #999;
+      }
+
+      #addBtn {
+        padding: 6px 14px;
+        border: 1px solid #999;
+        background: #f5f5f5;
+        cursor: pointer;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="container">
+      <table>
+        <thead>
+          <tr>
+            <th>Product Name</th>
+            <th>Product Category</th>
+            <th>Product Price</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+
+        <tbody id="productTbody"></tbody>
+      </table>
+
+      <hr />
+
+      <h2>Add Product</h2>
+
+      <div class="form-row">
+        <div class="field">
+          <label for="nameInput">Product Name:</label>
+          <input id="nameInput" type="text" />
+        </div>
+
+        <div class="field">
+          <label for="categoryInput">Product Category:</label>
+          <input id="categoryInput" type="text" />
+        </div>
+
+        <div class="field">
+          <label for="priceInput">Product Price:</label>
+          <input id="priceInput" type="text" />
+        </div>
+
+        <button id="addBtn">Add New</button>
+      </div>
+    </div>
+
+    <script>
+      // iv). default Data
+      const defaultProducts = [
+        { name: "M&M", category: "Snacks", price: "$1.99" },
+        { name: "Table", category: "Furniture", price: "$199" },
+        { name: "Kale", category: "Vegetables", price: "$2.49" },
+      ];
+
+      const tbody = document.getElementById("productTbody");
+      const nameInput = document.getElementById("nameInput");
+      const categoryInput = document.getElementById("categoryInput");
+      const priceInput = document.getElementById("priceInput");
+      const addBtn = document.getElementById("addBtn");
+
+      // Add row
+      function addRow(product) {
+        const tr = document.createElement("tr");
+
+        const tdName = document.createElement("td");
+        tdName.textContent = product.name;
+
+        const tdCategory = document.createElement("td");
+        tdCategory.textContent = product.category;
+
+        const tdPrice = document.createElement("td");
+        tdPrice.textContent = product.price;
+
+        // iii). Delete button
+        const tdAction = document.createElement("td");
+        const delBtn = document.createElement("button");
+        delBtn.textContent = "Delete";
+        delBtn.className = "delete-btn";
+
+        // click delete
+        delBtn.addEventListener("click", function () {
+          tr.remove();
+        });
+
+        tdAction.appendChild(delBtn);
+
+        tr.appendChild(tdName);
+        tr.appendChild(tdCategory);
+        tr.appendChild(tdPrice);
+        tr.appendChild(tdAction);
+
+        tbody.appendChild(tr);
+      }
+
+      // default rows
+      for (const p of defaultProducts) {
+        addRow(p);
+      }
+
+      // i). Add new
+      addBtn.addEventListener("click", function () {
+        const name = nameInput.value.trim();
+        const category = categoryInput.value.trim();
+        const rawPrice = priceInput.value.trim();
+
+        if (!name || !category || !rawPrice) {
+          alert("Please fill out all fields.");
+          return;
+        }
+
+        const priceNumber = Number(rawPrice);
+        if (isNaN(priceNumber)) {
+          alert("Product price must be a number.");
+          return;
+        }
+        const formattedPrice = "$" + priceNumber.toFixed(2);
+
+        addRow({ name, category, price: formattedPrice });
+
+        // ii). input cleared.
+        nameInput.value = "";
+        categoryInput.value = "";
+        priceInput.value = "";
+      });
+    </script>
+  </body>
+</html>
