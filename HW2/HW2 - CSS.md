@@ -10,10 +10,8 @@ https://leetcode.com/problem-list/oizxjoit/
 
 准备以下⼋股题⽬答案, 写在`note.md`⾥
 
-<aside>
-
 1. What is CSS?
-2. How do you link a CSS file to an HTML document?
+
 3. What is block element? How is it different from inline, and inline-block elements?
 4. What is the difference between pseudo-class and pseudo-element?
 5. What is the difference between the child combinator and the descendant combinator?

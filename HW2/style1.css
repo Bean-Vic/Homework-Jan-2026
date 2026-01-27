@@ -1,0 +1,76 @@
+/* Reset */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  font-family: serif;
+
+  /* CSS GRID for page layout */
+  display: grid;
+  grid-template-rows: 120px 1fr 80px;
+  grid-template-columns: 20% 1fr 20%;
+  grid-template-areas:
+    "header header header"
+    "nav article aside"
+    "footer footer footer";
+}
+
+/* Header */
+header {
+  grid-area: header;
+  background: #9acd32;
+
+  /* FLEX for content alignment */
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  font-size: 2rem;
+}
+
+/* Nav */
+nav {
+  grid-area: nav;
+  background: #f5f5dc;
+
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  font-size: 1.5rem;
+}
+
+/* Article */
+article {
+  grid-area: article;
+  background: #ffffff;
+
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  font-size: 1.5rem;
+}
+
+/* Aside */
+aside {
+  grid-area: aside;
+  background: #f5f5dc;
+
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  font-size: 1.5rem;
+}
+
+/* Footer */
+footer {
+  grid-area: footer;
+  background: #ffff00;
+
+  display: flex;
+  align-items: flex-start;
+  padding: 20px;
+  font-size: 1.5rem;
+}
