@@ -1,0 +1,73 @@
+body {
+  font-family: Arial, sans-serif;
+  margin: 24px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 16px;
+  margin: 16px 0;
+}
+
+.status {
+  margin: 10px 0;
+  font-weight: 600;
+}
+
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 10px;
+}
+
+table {
+  border-collapse: collapse;
+  min-width: 600px;
+  width: 100%;
+}
+
+th,
+td {
+  border: 1px solid #333;
+  padding: 8px 10px;
+  text-align: left;
+}
+
+th {
+  background: #f2f2f2;
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+.box {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 10px;
+}
+
+pre {
+  white-space: pre-wrap;
+  word-wrap: break-word;
+}
+
+.row {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+
+input {
+  padding: 8px;
+  min-width: 280px;
+}
