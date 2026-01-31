@@ -1,7 +1,9 @@
 ## 1. What is the Flux architecture?
-Flux is an architecture used to manage state in front-end applications.  
-The key idea is one-way data flow, where data moves in a single direction.  
-This makes state changes easier to understand and debug, especially in larger apps.
+Flux architecture is a way to manage state using one-way data flow.
+
+In Flux, actions describe what happened, they are sent to a dispatcher, which forwards them to stores.
+The store updates the state, and the view (UI) reads the state and re-renders.
+The key idea is that data always flows in one direction, which makes the app easier to understand and debug.
 
 ---
 
