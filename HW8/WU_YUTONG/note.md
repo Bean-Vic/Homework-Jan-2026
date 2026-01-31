@@ -1,5 +1,3 @@
-# Jest Interview Notes (30s Answers)
-
 ## 1. What is Jest?
 Jest is a JavaScript testing framework mainly used for testing JavaScript and React applications.  
 It allows us to write test cases, make assertions, mock functions, and check results easily.  
