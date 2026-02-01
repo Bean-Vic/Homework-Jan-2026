@@ -1,0 +1,73 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Student Info</title>
+    <style>
+      table {
+        border-collapse: collapse;
+        text-align: center;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="stu-table"></div>
+  </body>
+  <script>
+    const tableInfo = {
+      tableHeader: ["Student Name", "Age", "Phone", "Address"],
+      tableContent: [
+        {
+          "Student Name": "John",
+          Age: 19,
+          Phone: "455-983-0903",
+          Address: "123 Ave, San Francisco, CA, 94011",
+        },
+        {
+          "Student Name": "Alex",
+          Age: 21,
+          Phone: "455-983-0912",
+          Address: "456 Rd, San Francisco, CA, 94012",
+        },
+        {
+          "Student Name": "Josh",
+          Age: 22,
+          Phone: "455-345-0912",
+          Address: "789 Dr, Newark, CA, 94016",
+        },
+        {
+          "Student Name": "Matt",
+          Age: 23,
+          Phone: "321-345-0912",
+          Address: "223 Dr, Sunnyvale, CA, 94016",
+        },
+      ],
+    };
+    const table = document.createElement("table");
+    table.border = "1";
+
+    const thead = document.createElement("thead");
+    const headRow = document.createElement("tr");
+    tableInfo.tableHeader.forEach((txt) => {
+      const th = document.createElement("th");
+      th.textContent = txt;
+      headRow.appendChild(th);
+    });
+    thead.appendChild(headRow);
+    table.appendChild(thead);
+
+    const tbody = document.createElement("tbody");
+    tableInfo.tableContent.forEach((row) => {
+      const tr = document.createElement("tr");
+      tableInfo.tableHeader.forEach((key) => {
+        const td = document.createElement("td");
+        td.textContent = row[key];
+        tr.appendChild(td);
+      });
+      tbody.appendChild(tr);
+    });
+    table.appendChild(tbody);
+    document.querySelector("#stu-table").appendChild(table);
+  </script>
+</html>
