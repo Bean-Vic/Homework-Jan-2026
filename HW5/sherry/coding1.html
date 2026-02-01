@@ -1,0 +1,269 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+        .part-txt {
+            font-weight: 800;
+            font-size: large;
+            margin-bottom: 10px;
+        }
+
+        .layout {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .card {
+            border: 1px solid #c4c4c4;
+            border-radius: 5px;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 12px;
+        }
+
+        th,
+        td {
+            border: 1px solid #c4c4c4;
+            padding: 8px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #DBDBDB;
+        }
+
+        .error-txt {
+            color: red;
+            display: none;
+            margin-top: 8px;
+        }
+
+        .part2-txt {
+            font-size: large;
+            font-weight: 800;
+            padding: 10px px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="layout">
+        <!-- part 1 -->
+        <div class="card">
+            <div class="part-txt">Part 1</div>
+            <button id="load-btn">Load Users</button>
+            <table id="user-tbl">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody></tbody>
+            </table>
+            <p class="error-txt" id="part1-error">Error Fetching</p>
+        </div>
+        <!-- part 2 -->
+        <div class="card">
+            <div class="part-txt">Part 2</div>
+            <label>
+                <input id="user-input" placeholder=" Enter User ID" />
+            </label>
+            <button id="search-btn">Search</button>
+            <p class="error-txt" id="part2-error"> User was not found. Please try another user ID </p>
+            <div class="part2-txt">User Info
+                <div id="user-info"></div>
+            </div>
+            <div class="part2-txt">User Posts
+                <div id="user-posts"></div>
+            </div>
+            <div class="part2-txt">User Todos
+                <div id="user-todos"></div>
+            </div>
+        </div>
+        <!-- part 3 -->
+        <div class="card">
+            <div class="part-txt">Part 3</div>
+            <button id="delay-btn">Send Delayed Request</button>
+            <p id="delay-status"></p>
+        </div>
+    </div>
+</body>
+<script>
+    // coding 1
+    const user_url = "https://jsonplaceholder.typicode.com/users";
+    const loadBtn = document.querySelector("#load-btn");
+    const tableBody = document.querySelector("#user-tbl tbody");
+    const errorMsg = document.querySelector("#part1-error");
+    function createUserRow(user) {
+        const id = user.id ?? "";
+        const name = user.name ?? "";
+        const email = user.email ?? "";
+        const city = user.address?.city ?? "";
+
+        return `<tr>
+            <td>${id}</td>
+            <td>${name}</td>
+            <td>${email}</td>
+            <td>${city}</td>
+            </tr>`
+    }
+    async function loadUsers() {
+        tableBody.innerHTML = "";
+        errorMsg.style.display = "none";
+        try {
+            const res = await fetch(user_url);
+            if (!res.ok) {
+                throw new Error("Failed to fetch users");
+            }
+            const users = await res.json();
+            let rowsHtml = "";
+            users.forEach(element => {
+                rowsHtml += createUserRow(element);
+            });
+            tableBody.innerHTML = rowsHtml;
+        } catch (error) {
+            console.log(error);
+            errorMsg.style.display = "block";
+        }
+    }
+    loadBtn.addEventListener("click", loadUsers);
+
+    // coding 2
+
+    const userInput = document.querySelector("#user-input");
+    const searchBtn = document.querySelector("#search-btn");
+    const userInfo = document.querySelector("#user-info");
+    const userPosts = document.querySelector("#user-posts");
+    const userTodos = document.querySelector("#user-todos");
+    const errorMsg2 = document.querySelector("#part2-error");
+
+    async function searchUser() {
+        const userId = userInput.value.trim();
+
+        errorMsg2.style.display = "none";
+        userInfo.innerHTML = "";
+        userPosts.innerHTML = "";
+        userTodos.innerHTML = "";
+
+        if (!userId) return;
+        try {
+
+            const userUrl = `https://jsonplaceholder.typicode.com/users/${userId}`;
+            const postsUrl = `https://jsonplaceholder.typicode.com/posts?userId=${userId}`;
+            const todosUrl = `https://jsonplaceholder.typicode.com/todos?userId=${userId}`;
+
+            const [userRes, postsRes, todosRes] = await Promise.all([fetch(userUrl), fetch(postsUrl), fetch(todosUrl)]);
+
+            if (!userRes.ok) {
+                throw new Error("User not found!");
+            }
+
+            const user = await userRes.json();
+            const posts = await postsRes.json();
+            const todos = await todosRes.json();
+            userInfo.innerHTML = `
+                <div style="border: 1px solid #ccc; padding: 10px; margin-top: 8px; font-weight: 400; border-radius: 8px;">
+                    <div><strong>Name: </strong> ${user.name}</div>
+                    <div><strong>Email: </strong> ${user.email}</div>
+                    <div><strong>City: </strong> ${user.address?.city ?? ""}</div>
+                    <div><strong>Company: </strong> ${user.company?.name ?? ""}</div>
+                    <div><strong>Website: </strong> ${user.website}</div>
+                </div>
+                `;
+            renderPosts(posts, userPosts);
+            renderTodosTable(todos, userTodos);
+        } catch (err) {
+            console.error(err);
+            errorMsg2.style.display = "block";
+            userInput.value = "";
+        }
+
+        function renderTodosTable(todos, container) {
+            if (!todos || !todos.length) {
+                return container.innerHTML = "<div>No todos found.</div>";
+            }
+            let tableHtml = `
+                    <table style="width: 100%; border-collapse: collapse; margin-top: 10px; font-weight: 400">
+                    <thead>
+                        <tr>
+                        <th>ID</th>
+                        <th>Title</th>
+                        <th>Completed</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                `;
+
+            todos.forEach(todo => {
+                tableHtml += `
+                    <tr>
+                        <td>${todo.id}</td>
+                        <td>${todo.title}</td>
+                        <td>${todo.completed ? "✔" : "✗"}</td>
+                    </tr>
+                    `;
+            });
+
+            tableHtml += `
+                    </tbody>
+                    </table>
+                `;
+
+            container.innerHTML = tableHtml;
+        }
+        function renderPosts(posts, containers) {
+            if (!posts || !posts.length) {
+                return container.innerHTML = "<div>No posts found.</div>";
+            }
+            let listHtml = `<ul style="padding-left: 20px;">`;
+            posts.forEach(post => {
+                listHtml += `
+                    <li style="margin-bottom: 10px;">
+                        ${post.id} - ${post.title},
+                        body: ${post.body}
+                    </li>
+        `;
+            });
+            listHtml += `</ul>`;
+            containers.innerHTML = listHtml;
+        }
+    }
+    searchBtn.addEventListener("click", searchUser);
+
+    // coding3
+    const delayBtn = document.querySelector("#delay-btn");
+    const delayStatus = document.querySelector("#delay-status");
+    async function delayedRequest(url = "https://jsonplaceholder.typicode.com/users/1") {
+        delayStatus.textContent = "Waiting...";
+        try {
+            const res = await fetch(url);
+            if (!res.ok) {
+                throw new Error("Request failed");
+            }
+            const data = await res.json();
+            setTimeout(() => {
+                console.log(JSON.stringify(data, null, " "));
+                delayStatus.textContent = "Check console for the data";
+            }, 2000);
+        } catch (err) {
+            console.error(err);
+            delayStatus.textContent = "Something went wrong";
+        }
+    }
+    delayBtn.addEventListener("click", () => delayedRequest());
+</script>
+
+</html>
