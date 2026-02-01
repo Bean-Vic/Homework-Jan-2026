@@ -1,72 +1,59 @@
 # HW8 Q&A
 
-### 1. What is the Flux architecture?
+### 1. What is Jest?
 
-Flux is an application architecture that enforces unidirectional data flow to make state changes predictable.
+Jest is a JavaScript testing framework used to write and run automated tests. It provides everything needed for testing, including a test runner, assertions, and mocking utilities.
 
-In Flux, actions describe what happened, a dispatcher sends those actions, and stores manage and update the application state based on those actions.
+Jest is commonly used for unit testing and component testing, helping developers verify code behavior and prevent regressions.
 
-State changes can only happen through dispatched actions, and stores are responsible for handling the logic that updates state.
+### 2. What is a test case in Jest?
 
-By enforcing a single direction of data flow and controlled state updates, Flux helps reduce complexity and makes applications easier to debug and reason about.
+In Jest, a test case is a single test that checks one specific behavior or expectation in the code.
 
-### 2. Explain what the Redux store, actions, reducers are and what they do.
+It defines the conditions, performs an action, and asserts the expected result.
 
-In Redux, actions are plain JavaScript objects that describe what happened in the application.
-Reducers are pure functions that take the current state and an action, and return the next state based on that action.
-The store holds the application state and coordinates state updates by dispatching actions to reducers.
+Each test case is independent and can pass or fail on its own, making issues easier to identify and debug.
 
-This clear separation of responsibilities enforces unidirectional data flow and makes state changes predictable and easier to debug.
+### 3. What does expect do in Jest?
 
-### 3. Describe the work flow of Redux
+In Jest, expect is used to make assertions about the result of a test.
 
-The Redux workflow follows a strict unidirectional data flow.
+It takes an actual value and compares it against an expected outcome using matchers.
 
-First, an action is dispatched to describe a state change.
-The store receives the action and passes it to the reducer.
-The reducer, which is a pure function, calculates and returns a new state based on the action.
-The store then updates the state and notifies subscribers of the change.
+If the expectation is not met, the test fails, helping ensure the code behaves as intended.
 
-This controlled workflow ensures that state updates are predictable and easy to trace.
+### 4. What is the difference between .toBe() and .toEqual()?
 
-### 4. How do you create/configure a store in redux?
+In Jest, .toBe() is used for strict equality comparison and checks whether two values reference the same object or value.
 
-To create and configure a Redux store, you define how state should be updated by providing a reducer, and then set up any middleware or developer tools you need.
+.toEqual(), on the other hand, performs a deep comparison and checks whether two objects or arrays have the same structure and values.
 
-In modern Redux, this is typically done using Redux Toolkit’s configureStore. You pass in your root reducer or a set of slice reducers, and it automatically sets up common middleware and enables Redux DevTools in development.
+In practice, .toBe() is commonly used for primitive values, while .toEqual() is used for objects and arrays.
 
-This approach reduces boilerplate and makes store configuration simpler and more consistent.
+### 5. How do you test if a react component renders correctly?
 
-### 5. Explain how to use connect()
+To test whether a React component renders correctly, I usually use Jest with React Testing Library.
 
-`connect()` is used to connect a React component to the Redux store.
+I render the component, then query for key UI elements the user should see—typically using accessible queries like getByRole or getByText—and assert that they appear with the expected content.
 
-It allows a component to receive state and dispatch actions through props by mapping store state and dispatch functions to the component’s props.
+If the component renders differently based on props or state, I test those scenarios as well. For UI regression, I may add a snapshot test, but I prefer behavior-based assertions because they’re more stable.
 
-Internally, `connect()` subscribes the component to the store and re-renders it when relevant state changes, while keeping Redux logic separate from the component itself.
+### 6. How do you simulate a button click in a test?
 
-### 6. What is mapDispatchToProps and what does it do?
+To simulate a button click in a test, I render the component and select the button using React Testing Library, usually with an accessible query like `getByRole`.
 
-mapDispatchToProps is used to map dispatching actions to a component’s props.
+Then I trigger the click using `userEvent.click` or `fireEvent.click`. After that, I assert the expected outcome of the click, such as a UI update or a function being called.
 
-It allows a component to trigger state changes by calling prop functions instead of interacting with dispatch directly.
+### 7. How do you mock a function with Jest?
 
-This keeps the component focused on behavior and separates Redux-specific logic from the component implementation.
+In Jest, you can mock a function by replacing its implementation with a mock function using `jest.fn()` or `jest.spyOn()`.
 
-### 7. What is mapStateToProps and what does it do?
+Mock functions allow you to control return values and track how the function is called, such as the number of calls and the arguments passed in.
 
-mapStateToProps is used to select data from the Redux store and map it to a component’s props.
+This is useful for isolating tests and avoiding real side effects while verifying how the code interacts with its dependencies.
 
-It determines which parts of the global state a component receives, allowing the component to stay focused on the data it actually needs.
+### 8. What is snapshot test and how do you utilize it?
 
-When the store updates, mapStateToProps runs again and the component only re-renders if the mapped props have changed.
+A snapshot test checks whether a component’s rendered output has changed unexpectedly. It works by saving a snapshot of the UI and comparing future renders against that snapshot. Snapshot tests are mainly used for UI regression, and they are best applied to stable components.
 
-### 8. How do we use useSelector and useDispatch?
-
-`useSelector` and `useDispatch` are React Redux hooks used to interact with the Redux store in function components.
-
-`useSelector` allows a component to select and read specific pieces of state from the store, and the component re-renders when the selected state changes.
-
-`useDispatch` provides access to the store’s dispatch function, allowing the component to dispatch actions to update state.
-
-Together, they replace connect, mapStateToProps, and mapDispatchToProps in modern Redux applications.
+In practice, I use snapshot tests selectively and rely more on behavior-based tests for most cases.
