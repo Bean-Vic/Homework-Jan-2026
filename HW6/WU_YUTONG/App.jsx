@@ -1,11 +1,14 @@
 import React from "react";
 import Counter from "./counter";
 import { Shoppingcart } from "./Shoppingcart";
+import { counterlocal } from "./counterlocal";
 
-export default function App() {
+const CacheCounter = counterlocal(Counter, "counter_value");
+
+export function App() {
   return (
     <div>
-      <Counter initialValue={1} />
+      <CacheCounter initialValue={0} />
 
       <hr />
 
