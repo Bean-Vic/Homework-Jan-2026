@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Q1 Flexbox</title>
+    <style>
+      body {
+        margin: 8px;
+      }
+
+      .page {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      header {
+        background: yellowgreen;
+        min-height: 120px;
+        padding: 20px;
+        font-size: 40px;
+        color: #888;
+      }
+
+      main {
+        flex: 1;
+        display: flex;
+      }
+
+      nav,
+      aside {
+        width: 20%;
+        background: #f5f5dc;
+        padding: 30px;
+        font-size: 40px;
+        color: #888;
+      }
+
+      article {
+        flex: 1;
+        background: white;
+        padding: 30px;
+        font-size: 40px;
+        color: #888;
+      }
+
+      footer {
+        background: #eff305;
+        min-height: 60px;
+        padding: 20px;
+        font-size: 35px;
+        color: #888;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header>Header</header>
+
+      <main>
+        <nav>Nav</nav>
+        <article>Article</article>
+        <aside>Aside</aside>
+      </main>
+
+      <footer>Footer</footer>
+    </div>
+  </body>
+</html>
