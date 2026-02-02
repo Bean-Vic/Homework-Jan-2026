@@ -10,24 +10,28 @@ class Counter extends React.Component {
   }
 
   increase = () => {
-    this.setState({ value: this.state.value + 1 });
+    this.setState({ value: this.state.value + 1 }, () => {
+      if (this.props.saveValue) {
+        this.props.saveValue(this.state.value);
+      }
+    });
   };
 
   decrease = () => {
-    this.setState({ value: this.state.value - 1 });
+    this.setState({ value: this.state.value - 1 }, () => {
+      if (this.props.saveValue) {
+        this.props.saveValue(this.state.value);
+      }
+    });
   };
 
   render() {
-    const value = this.state.value;
-
     return (
       <div>
         <h2>Counter</h2>
-
-        <p>Current value: {value}</p>
+        <p>Current value: {this.state.value}</p>
 
         <button onClick={this.decrease}>Decrease</button>
-
         <button onClick={this.increase}>Increase</button>
       </div>
     );
@@ -35,3 +39,4 @@ class Counter extends React.Component {
 }
 
 export default Counter;
+
