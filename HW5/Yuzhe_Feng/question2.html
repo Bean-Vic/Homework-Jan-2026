@@ -1,0 +1,421 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>question2</title>
+    <style>
+      :root {
+        --border: #d6d6d6;
+        --muted: #f2f2f2;
+        --text: #111;
+        --subtext: #666;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #fff;
+        margin: 0;
+        padding: 28px;
+        color: var(--text);
+      }
+
+      .section {
+        border: 1px solid var(--border);
+        border-radius: 8px;
+        padding: 22px;
+        margin-bottom: 26px;
+      }
+
+      h2 {
+        margin: 0 0 18px;
+        font-size: 30px;
+        font-weight: 700;
+      }
+
+      .row {
+        display: flex;
+        gap: 16px;
+        align-items: center;
+        flex-wrap: wrap;
+        margin-bottom: 14px;
+      }
+
+      button {
+        padding: 10px 16px;
+        border: 1px solid #aaa;
+        background: #eee;
+        border-radius: 3px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+
+      button:disabled {
+        opacity: 0.6;
+        cursor: not-allowed;
+      }
+
+      input {
+        padding: 10px 12px;
+        border: 1px solid #aaa;
+        border-radius: 3px;
+        font-size: 16px;
+        min-width: 260px;
+      }
+
+      .error {
+        color: #b00020;
+        margin-top: 10px;
+        font-weight: 600;
+      }
+
+      /* Part 1 table */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+      }
+
+      thead th {
+        background: var(--muted);
+        border: 1px solid var(--border);
+        text-align: left;
+        padding: 14px;
+        font-size: 15px;
+      }
+
+      tbody td {
+        border: 1px solid var(--border);
+        padding: 12px 14px;
+        font-size: 15px;
+      }
+
+      /* zebra for readability (optional) */
+      tbody tr:nth-child(even) {
+        background: #fafafa;
+      }
+
+      /* Part 2 lists */
+      .block-title {
+        font-size: 20px;
+        font-weight: 700;
+        margin: 18px 0 10px;
+      }
+
+      .kv-list {
+        margin: 0;
+        padding-left: 18px;
+      }
+
+      .kv-list li {
+        margin: 6px 0;
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 14px 0;
+      }
+
+      /* Part 3 message */
+      .status {
+        margin-top: 14px;
+        font-size: 18px;
+        font-weight: 600;
+      }
+    </style>
+  </head>
+
+  <body>
+    <!-- Part 1 -->
+    <section class="section">
+      <h2>Part 1</h2>
+
+      <div class="row">
+        <button id="loadUsersBtn">Load Users</button>
+      </div>
+
+      <div id="part1Error" class="error" style="display: none"></div>
+
+      <table>
+        <thead>
+          <tr>
+            <th style="width: 120px">ID</th>
+            <th style="width: 220px">Name</th>
+            <th>Email</th>
+            <th style="width: 200px">City</th>
+          </tr>
+        </thead>
+        <tbody id="usersTbody"></tbody>
+      </table>
+    </section>
+
+    <!-- Part 2  -->
+    <section class="section">
+      <h2>Part 2</h2>
+
+      <div class="row">
+        <input id="userIdInput" type="text" placeholder="Enter User ID" />
+        <button id="searchBtn">Search</button>
+      </div>
+
+      <div id="part2Error" class="error" style="display: none"></div>
+
+      <div class="block-title">User Info</div>
+      <ul id="userInfoList" class="kv-list"></ul>
+
+      <div class="block-title">User Posts</div>
+      <ul id="userPostsList" class="kv-list"></ul>
+
+      <div class="block-title">User Todos</div>
+      <ul id="userTodosList" class="kv-list"></ul>
+    </section>
+
+    <!-- Part 3 -->
+    <section class="section">
+      <h2>Part 3</h2>
+
+      <div class="row">
+        <button id="delayedBtn">Send Delayed Request</button>
+      </div>
+
+      <div id="part3Status" class="status"></div>
+    </section>
+
+    <script>
+      async function fetchJson(url) {
+        const res = await fetch(url);
+
+        if (!res.ok) {
+          throw new Error(`Request failed: ${res.status} ${res.statusText}`);
+        }
+
+        return res.json();
+      }
+
+      function showError(el, message) {
+        el.textContent = message;
+        el.style.display = "block";
+      }
+
+      function hideError(el) {
+        el.textContent = "";
+        el.style.display = "none";
+      }
+
+      function clearElement(el) {
+        el.innerHTML = "";
+      }
+
+      // Render an object as "key: value" list items
+      function renderKeyValueList(ul, obj) {
+        clearElement(ul);
+
+        if (!obj || typeof obj !== "object") return;
+
+        for (const [key, value] of Object.entries(obj)) {
+          const li = document.createElement("li");
+
+          // If value is an object, show JSON string to keep key:value format
+          const displayValue =
+            value && typeof value === "object"
+              ? JSON.stringify(value)
+              : String(value);
+
+          li.textContent = `${key}: ${displayValue}`;
+          ul.appendChild(li);
+        }
+      }
+
+      // Render an array of items as key:value blocks
+      function renderArrayAsKeyValueBlocks(ul, arr) {
+        clearElement(ul);
+
+        if (!Array.isArray(arr) || arr.length === 0) {
+          const li = document.createElement("li");
+          li.textContent = "(No data)";
+          ul.appendChild(li);
+          return;
+        }
+
+        arr.forEach((item, index) => {
+          const li = document.createElement("li");
+          li.style.marginBottom = "12px";
+
+          // Title line
+          const title = document.createElement("div");
+          title.style.fontWeight = "700";
+          title.textContent = `Item ${index + 1}`;
+          li.appendChild(title);
+
+          // Each key:value on its own line
+          for (const [k, v] of Object.entries(item)) {
+            const line = document.createElement("div");
+            const displayValue =
+              v && typeof v === "object" ? JSON.stringify(v) : String(v);
+            line.textContent = `${k}: ${displayValue}`;
+            li.appendChild(line);
+          }
+
+          ul.appendChild(li);
+        });
+      }
+
+      // Part 1
+      const loadUsersBtn = document.getElementById("loadUsersBtn");
+      const usersTbody = document.getElementById("usersTbody");
+      const part1Error = document.getElementById("part1Error");
+
+      async function loadUsers() {
+        hideError(part1Error);
+        clearElement(usersTbody);
+
+        loadUsersBtn.disabled = true;
+
+        try {
+          const url = "https://jsonplaceholder.typicode.com/users";
+          const users = await fetchJson(url);
+
+          users.forEach((u) => {
+            const tr = document.createElement("tr");
+
+            const tdId = document.createElement("td");
+            tdId.textContent = u.id;
+
+            const tdName = document.createElement("td");
+            tdName.textContent = u.name;
+
+            const tdEmail = document.createElement("td");
+            tdEmail.textContent = u.email;
+
+            const tdCity = document.createElement("td");
+            tdCity.textContent = u.address?.city ?? "";
+
+            tr.appendChild(tdId);
+            tr.appendChild(tdName);
+            tr.appendChild(tdEmail);
+            tr.appendChild(tdCity);
+
+            usersTbody.appendChild(tr);
+          });
+        } catch (err) {
+          showError(part1Error, `Failed to load users. ${err.message}`);
+        } finally {
+          loadUsersBtn.disabled = false;
+        }
+      }
+
+      loadUsersBtn.addEventListener("click", loadUsers);
+
+      // Part 2
+      const userIdInput = document.getElementById("userIdInput");
+      const searchBtn = document.getElementById("searchBtn");
+      const part2Error = document.getElementById("part2Error");
+
+      const userInfoList = document.getElementById("userInfoList");
+      const userPostsList = document.getElementById("userPostsList");
+      const userTodosList = document.getElementById("userTodosList");
+
+      function clearPart2Lists() {
+        clearElement(userInfoList);
+        clearElement(userPostsList);
+        clearElement(userTodosList);
+      }
+
+      function showUserNotFound() {
+        showError(
+          part2Error,
+          "User was not found. Please try another user ID.",
+        );
+        userIdInput.value = "";
+      }
+
+      async function searchUser() {
+        hideError(part2Error);
+        clearPart2Lists();
+
+        const raw = userIdInput.value.trim();
+
+        // Basic input validation
+        const id = Number(raw);
+        if (!raw || Number.isNaN(id) || id <= 0) {
+          showError(part2Error, "Please enter a valid numeric user ID.");
+          userIdInput.value = "";
+          return;
+        }
+
+        searchBtn.disabled = true;
+
+        const userUrl = `https://jsonplaceholder.typicode.com/users/${id}`;
+        const postsUrl = `https://jsonplaceholder.typicode.com/posts?userId=${id}`;
+        const todosUrl = `https://jsonplaceholder.typicode.com/todos?userId=${id}`;
+
+        try {
+          // Promise.all
+          const [user, posts, todos] = await Promise.all([
+            fetchJson(userUrl),
+            fetchJson(postsUrl),
+            fetchJson(todosUrl),
+          ]);
+
+          if (!user || !user.id) {
+            showUserNotFound();
+            return;
+          }
+
+          // User Info: key:value
+          renderKeyValueList(userInfoList, user);
+
+          // Posts / Todos: list each item in key:value format
+          renderArrayAsKeyValueBlocks(userPostsList, posts);
+          renderArrayAsKeyValueBlocks(userTodosList, todos);
+        } catch (err) {
+          showError(part2Error, `Failed to search. ${err.message}`);
+        } finally {
+          searchBtn.disabled = false;
+        }
+      }
+
+      searchBtn.addEventListener("click", searchUser);
+
+      userIdInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") searchUser();
+      });
+
+      // Part 3
+      const delayedBtn = document.getElementById("delayedBtn");
+      const part3Status = document.getElementById("part3Status");
+
+      async function delayedRequest(
+        url = "https://jsonplaceholder.typicode.com/users/1",
+      ) {
+        const data = await fetchJson(url);
+
+        // Wait 2 seconds
+        await new Promise((resolve) => setTimeout(resolve, 2000));
+
+        // Output JSON string to console
+        console.log(JSON.stringify(data, null, " "));
+      }
+
+      delayedBtn.addEventListener("click", async () => {
+        part3Status.textContent = "Waiting …";
+
+        delayedBtn.disabled = true;
+
+        try {
+          await delayedRequest("https://jsonplaceholder.typicode.com/users/1");
+          part3Status.textContent = "Check console for the data";
+        } catch (err) {
+          part3Status.textContent = "Request failed. Check console.";
+          console.error(err);
+        } finally {
+          delayedBtn.disabled = false;
+        }
+      });
+    </script>
+  </body>
+</html>
