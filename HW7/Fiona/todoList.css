@@ -1,0 +1,105 @@
+/* todo list css */
+.hw7-todoCard {
+    box-sizing: border-box;
+    border: 1px solid black;
+    border-radius: 10px;
+    padding: 20px;
+    max-width: 600px;
+    margin: 0 auto;
+    background: white;
+}
+
+.hw7-todoTitle {
+    margin: 0 0 12px;
+    font-weight: bold;
+    font-size: 20px;
+    text-align: left;
+}
+
+.hw7-todoInputContainer {
+    width: 100%;
+    border: none;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 12px;
+    padding: 10px;
+    box-sizing: border-box;
+}
+
+.hw7-todoInput {
+    flex: 1;
+    min-width: 50px;
+    padding: 10px 12px;
+    border: 1px solid black;
+    border-radius: 4px;
+    font-size: 20px;
+}
+
+.hw7-todoBtn {
+    flex-shrink: 0;
+    padding: 10px 12px;
+    border: 1px solid black;
+    border-radius: 4px;
+    background: lightgrey;
+    cursor: pointer;
+}
+
+.hw7-todoToast {
+    margin: 10px 0 0;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    border: 1px solid black;
+    background: white;
+}
+
+.hw7-todoListContainer ul {
+    list-style: none;
+    padding: 0;
+    margin: 16px 0 0;
+}
+
+.hw7-todoItem {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 14px 8px;
+    border-top: 1px solid lightgrey;
+    background: whitesmoke;
+    gap: 12px;
+}
+
+.hw7-todoName {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.hw7-todoText {
+    font-size: 20px;
+}
+
+.hw7-todoUpdate {
+    display: flex;
+    gap: 14px;
+}
+
+.hw7-todoUpdateBtn {
+    border: 1px solid black;
+    background: lightgrey;
+    cursor: pointer;
+    font-size: 18px;
+}
+
+.is-completed {
+    text-decoration: line-through;
+    opacity: 0.6;
+}
+
+.hw7-todoEditInput {
+    font-size: 18px;
+    padding: 6px 8px;
+    border: 1px solid black;
+    border-radius: 4px;
+}
