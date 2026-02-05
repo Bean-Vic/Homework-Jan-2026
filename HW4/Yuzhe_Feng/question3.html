@@ -1,0 +1,93 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Tabs UI</title>
+
+    <style>
+      #tabs {
+        display: flex;
+        border: 1px solid #ccc;
+        border-bottom: none;
+        width: 700px;
+        max-width: 100%;
+        box-sizing: border-box;
+        background: #f5f5f5;
+      }
+
+      #tabs button {
+        padding: 12px 20px;
+        font-size: 18px;
+        border: none;
+        background: transparent;
+        cursor: pointer;
+      }
+
+      #tabs button.active {
+        background: #d9d9d9;
+        font-weight: bold;
+      }
+
+      .panel {
+        border: 1px solid #ccc;
+        padding: 20px;
+        width: 700px;
+        max-width: 100%;
+        box-sizing: border-box;
+        display: none;
+      }
+
+      .panel.active {
+        display: block;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div id="tabs">
+      <button>London</button>
+      <button>Paris</button>
+      <button>Tokyo</button>
+    </div>
+
+    <div class="panel">
+      <h2>London</h2>
+      <p>London is the capital city of England</p>
+    </div>
+
+    <div class="panel">
+      <h2>Paris</h2>
+      <p>Paris is the capital of France.</p>
+    </div>
+
+    <div class="panel">
+      <h2>Tokyo</h2>
+      <p>Tokyo is the capital of Japan.</p>
+    </div>
+
+    <script>
+      const tabs = document.getElementById("tabs");
+      const buttons = tabs.querySelectorAll("button");
+      const panels = document.querySelectorAll(".panel");
+
+      // Default: London selected
+      buttons[0].classList.add("active");
+      panels[0].classList.add("active");
+
+      // Event delegation
+      tabs.addEventListener("click", (e) => {
+        if (e.target.tagName !== "BUTTON") return;
+
+        const index = Array.from(buttons).indexOf(e.target);
+
+        buttons.forEach((btn, i) => {
+          btn.classList.toggle("active", i === index);
+        });
+
+        panels.forEach((panel, i) => {
+          panel.classList.toggle("active", i === index);
+        });
+      });
+    </script>
+  </body>
+</html>

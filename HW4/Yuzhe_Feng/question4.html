@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Longest Substring Without Repeating Characters</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        padding: 20px;
+      }
+
+      .card {
+        border: 1px solid #ccc;
+        padding: 16px;
+        max-width: 600px;
+        margin: auto;
+      }
+
+      label {
+        display: block;
+        margin-bottom: 8px;
+        font-weight: bold;
+      }
+
+      input {
+        width: 100%;
+        padding: 10px;
+        font-size: 16px;
+        box-sizing: border-box;
+      }
+
+      button {
+        margin-top: 16px;
+        padding: 12px 12px;
+        font-size: 16px;
+        width: 600px;
+        max-width: 100%;
+        cursor: pointer;
+      }
+
+      .result {
+        margin-top: 16px;
+        padding: 12px;
+        border: 1px solid #ddd;
+        background: #f7f7f7;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="card">
+      <h2>Longest Substring Without Repeating Characters</h2>
+
+      <label for="inputStr">Input string s:</label>
+      <input id="inputStr" type="text" placeholder="e.g. abcabcbb" />
+
+      <button id="submitBtn">Submit</button>
+
+      <div id="output" class="result">Result will appear here.</div>
+    </div>
+
+    <script>
+      function longestSub(s) {
+        let left = 0;
+        let bestStart = 0;
+        let bestLen = 0;
+        const seen = new Map();
+
+        for (let right = 0; right < s.length; right++) {
+          const ch = s[right];
+
+          if (seen.has(ch) && seen.get(ch) >= left) {
+            left = seen.get(ch) + 1;
+          }
+
+          seen.set(ch, right);
+
+          const windowLen = right - left + 1;
+          if (windowLen > bestLen) {
+            bestLen = windowLen;
+            bestStart = left;
+          }
+        }
+
+        return {
+          length: bestLen,
+          substring: s.slice(bestStart, bestStart + bestLen),
+        };
+      }
+
+      const inputElement = document.getElementById("inputStr");
+      const outputElement = document.getElementById("output");
+      const btn = document.getElementById("submitBtn");
+
+      btn.addEventListener("click", function () {
+        const s = inputElement.value;
+        const { length, substring } = longestSub(s);
+
+        outputElement.innerHTML =
+          'The answer is "' +
+          substring +
+          '", with the length of ' +
+          length +
+          ".";
+      });
+
+      inputElement.addEventListener("keydown", function (e) {
+        if (e.key === "Enter") btn.click();
+      });
+    </script>
+  </body>
+</html>
