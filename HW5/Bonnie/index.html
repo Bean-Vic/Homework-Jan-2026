@@ -1,0 +1,843 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HW - Product + Fetch Practice</title>
+    <style>
+      :root {
+        --bg: #f6f7fb;
+        --card: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --border: #e5e7eb;
+        --shadow: 0 10px 25px rgba(0, 0, 0, 0.08);
+
+        --primary: #4f46e5;
+        --primary-dark: #4338ca;
+        --danger: #ef4444;
+        --danger-dark: #dc2626;
+
+        --row-even: #eef2ff; /* darker-ish for even rows */
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial,
+          "Apple Color Emoji", "Segoe UI Emoji";
+        background: var(--bg);
+        color: var(--text);
+      }
+
+      .page {
+        max-width: 1100px;
+        margin: 28px auto 60px;
+        padding: 0 16px;
+      }
+
+      h1 {
+        margin: 0 0 14px;
+        font-size: 26px;
+        letter-spacing: 0.2px;
+      }
+
+      .sub {
+        margin: 0 0 18px;
+        color: var(--muted);
+        font-size: 14px;
+      }
+
+      .grid {
+        display: grid;
+        gap: 18px;
+        grid-template-columns: 1fr;
+      }
+
+      @media (min-width: 960px) {
+        .grid {
+          grid-template-columns: 1fr 1fr;
+        }
+        .span-2 {
+          grid-column: span 2;
+        }
+      }
+
+      .card {
+        background: var(--card);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        box-shadow: var(--shadow);
+        padding: 18px;
+      }
+
+      .card h2 {
+        margin: 0 0 10px;
+        font-size: 18px;
+      }
+
+      .card p.note {
+        margin: 0 0 14px;
+        color: var(--muted);
+        font-size: 13px;
+        line-height: 1.4;
+      }
+
+      /* Form */
+      .form-row {
+        display: grid;
+        gap: 10px;
+        grid-template-columns: 1fr;
+        margin-bottom: 12px;
+      }
+
+      @media (min-width: 640px) {
+        .form-row {
+          grid-template-columns: 1fr 1fr 1fr auto;
+          align-items: end;
+        }
+      }
+
+      label {
+        display: block;
+        font-size: 12px;
+        color: var(--muted);
+        margin-bottom: 6px;
+      }
+
+      input[type="text"],
+      input[type="number"] {
+        width: 100%;
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        outline: none;
+        font-size: 14px;
+        background: #fff;
+      }
+
+      input[type="text"]:focus,
+      input[type="number"]:focus {
+        border-color: rgba(79, 70, 229, 0.55);
+        box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+      }
+
+      .btn {
+        border: none;
+        border-radius: 10px;
+        padding: 10px 14px;
+        font-size: 14px;
+        cursor: pointer;
+        transition: 0.15s ease;
+        white-space: nowrap;
+      }
+
+      .btn-primary {
+        background: var(--primary);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--primary-dark);
+      }
+
+      .btn-danger {
+        background: var(--danger);
+        color: #fff;
+        padding: 8px 12px;
+        font-size: 13px;
+      }
+      .btn-danger:hover {
+        background: var(--danger-dark);
+      }
+
+      /* Tables */
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        overflow: hidden;
+        border-radius: 12px;
+        border: 1px solid var(--border);
+      }
+
+      thead th {
+        text-align: left;
+        font-size: 13px;
+        padding: 12px;
+        background: #111827;
+        color: #fff;
+      }
+
+      tbody td {
+        padding: 12px;
+        border-top: 1px solid var(--border);
+        font-size: 14px;
+      }
+
+      /* requirement: even rows darker background */
+      tbody tr:nth-child(even) {
+        background: var(--row-even);
+      }
+
+      .table-empty {
+        color: var(--muted);
+        font-size: 14px;
+        margin-top: 10px;
+      }
+
+      /* Messages */
+      .msg {
+        margin-top: 10px;
+        font-size: 14px;
+        padding: 10px 12px;
+        border-radius: 10px;
+        border: 1px solid var(--border);
+        background: #fafafa;
+      }
+
+      .msg.error {
+        border-color: rgba(239, 68, 68, 0.35);
+        background: rgba(239, 68, 68, 0.08);
+        color: #991b1b;
+      }
+
+      .msg.success {
+        border-color: rgba(34, 197, 94, 0.35);
+        background: rgba(34, 197, 94, 0.08);
+        color: #166534;
+      }
+
+      .split {
+        display: grid;
+        gap: 14px;
+        grid-template-columns: 1fr;
+      }
+      @media (min-width: 740px) {
+        .split {
+          grid-template-columns: 1fr 1fr;
+        }
+      }
+
+      .kv-list {
+        list-style: none;
+        padding: 0;
+        margin: 10px 0 0;
+        display: grid;
+        gap: 6px;
+      }
+
+      .kv-list li {
+        padding: 10px 12px;
+        border: 1px solid var(--border);
+        border-radius: 10px;
+        background: #fff;
+        font-size: 14px;
+      }
+
+      .section-title {
+        margin: 12px 0 6px;
+        font-size: 14px;
+        color: var(--muted);
+        font-weight: 600;
+      }
+
+      .inline-controls {
+        display: flex;
+        gap: 10px;
+        align-items: center;
+        flex-wrap: wrap;
+      }
+
+      .inline-controls input {
+        width: 220px;
+        max-width: 100%;
+      }
+
+      .divider {
+        height: 1px;
+        background: var(--border);
+        margin: 14px 0;
+      }
+
+      code {
+        background: #111827;
+        color: #fff;
+        padding: 2px 6px;
+        border-radius: 6px;
+        font-size: 12px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <div class="page">
+      <h1>Homework Page</h1>
+      <p class="sub">
+        Includes: <b>Product Management</b> + Fetch practice (Users table, Search
+        user info/posts/todos, Delayed request).
+      </p>
+
+      <div class="grid">
+        <!-- ===================== 2.1 Product Management ===================== -->
+        <section class="card span-2" aria-labelledby="product-title">
+          <h2 id="product-title">2.1 Product Management</h2>
+          <p class="note">
+            Fill out all fields and click <b>Add New</b>. If any field is empty,
+            no product will be created. After adding, inputs are cleared. You
+            can delete any row. Page loads with 3 default items. Even rows have
+            darker background.
+          </p>
+
+          <form id="productForm" novalidate>
+            <div class="form-row">
+              <div>
+                <label for="productName">Product Name</label>
+                <input id="productName" type="text" placeholder="e.g. iPhone" />
+              </div>
+
+              <div>
+                <label for="productPrice">Price</label>
+                <input
+                  id="productPrice"
+                  type="number"
+                  placeholder="e.g. 999"
+                  min="0"
+                  step="0.01"
+                />
+              </div>
+
+              <div>
+                <label for="productCategory">Category</label>
+                <input
+                  id="productCategory"
+                  type="text"
+                  placeholder="e.g. Electronics"
+                />
+              </div>
+
+              <button class="btn btn-primary" type="submit">Add New</button>
+            </div>
+          </form>
+
+          <div id="productMsg" class="msg" style="display: none"></div>
+
+          <div style="margin-top: 12px">
+            <table aria-label="Products table">
+              <thead>
+                <tr>
+                  <th style="width: 26%">Name</th>
+                  <th style="width: 18%">Price</th>
+                  <th style="width: 26%">Category</th>
+                  <th style="width: 18%">Created</th>
+                  <th style="width: 12%">Action</th>
+                </tr>
+              </thead>
+              <tbody id="productTbody"></tbody>
+            </table>
+
+            <div id="productEmpty" class="table-empty" style="display: none">
+              No products yet.
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================== 3.1 Part 1 Users Table ===================== -->
+        <section class="card" aria-labelledby="part1-title">
+          <h2 id="part1-title">3.1 Part 1 — Load Users into a Table</h2>
+          <p class="note">
+            GET <code>https://jsonplaceholder.typicode.com/users</code> and show
+            in a table. Errors are handled and shown below.
+          </p>
+
+          <div id="usersMsg" class="msg" style="display: none"></div>
+
+          <table aria-label="Users table">
+            <thead>
+              <tr>
+                <th style="width: 10%">ID</th>
+                <th style="width: 22%">Name</th>
+                <th style="width: 20%">Username</th>
+                <th style="width: 24%">Email</th>
+                <th style="width: 24%">Company</th>
+              </tr>
+            </thead>
+            <tbody id="usersTbody"></tbody>
+          </table>
+        </section>
+
+        <!-- ===================== 3.2 Part 2 Search User + Posts + Todos ===================== -->
+        <section class="card" aria-labelledby="part2-title">
+          <h2 id="part2-title">3.2 Part 2 — Search by User ID</h2>
+          <p class="note">
+            Enter a user ID and click Search. Display user info, posts, and
+            todos in one page (lists of <b>key: value</b>). Use
+            <code>Promise.all</code> / <code>Promise.allSettled</code>.
+          </p>
+
+          <div class="inline-controls">
+            <input
+              id="userIdInput"
+              type="number"
+              min="1"
+              placeholder="Enter user ID (e.g. 2)"
+            />
+            <button id="searchBtn" class="btn btn-primary" type="button">
+              Search
+            </button>
+          </div>
+
+          <div id="searchMsg" class="msg" style="display: none"></div>
+
+          <div class="divider"></div>
+
+          <div class="split">
+            <div>
+              <div class="section-title">User Info</div>
+              <ul id="userInfoList" class="kv-list"></ul>
+            </div>
+
+            <div>
+              <div class="section-title">Posts</div>
+              <ul id="postsList" class="kv-list"></ul>
+            </div>
+
+            <div>
+              <div class="section-title">Todos</div>
+              <ul id="todosList" class="kv-list"></ul>
+            </div>
+          </div>
+        </section>
+
+        <!-- ===================== 3.3 Part 3 Delayed Request ===================== -->
+        <section class="card span-2" aria-labelledby="part3-title">
+          <h2 id="part3-title">3.3 Part 3 — delayedRequest(url)</h2>
+          <p class="note">
+            Click the button to fetch data and print JSON string to the console
+            after <b>2 seconds</b>. Immediately show “Waiting …”, then replace
+            with “Check console for the data”.
+          </p>
+
+          <div class="inline-controls">
+            <input
+              id="delayUrlInput"
+              type="text"
+              value="https://jsonplaceholder.typicode.com/users/1"
+            />
+            <button id="delayBtn" class="btn btn-primary" type="button">
+              Run delayedRequest
+            </button>
+          </div>
+
+          <div id="delayMsg" class="msg" style="display: none"></div>
+        </section>
+      </div>
+    </div>
+
+    <script>
+      // ===================== Utilities =====================
+      const $ = (selector) => document.querySelector(selector);
+
+      function showMessage(el, text, type = "info") {
+        el.textContent = text;
+        el.className = "msg";
+        if (type === "error") el.classList.add("error");
+        if (type === "success") el.classList.add("success");
+        el.style.display = "block";
+      }
+
+      function hideMessage(el) {
+        el.style.display = "none";
+        el.textContent = "";
+        el.className = "msg";
+      }
+
+      async function fetchJson(url) {
+        const res = await fetch(url);
+        // jsonplaceholder sometimes returns 200 with {}, but handle non-OK too
+        if (!res.ok) {
+          throw new Error(`HTTP ${res.status} ${res.statusText}`);
+        }
+        return res.json();
+      }
+
+      function toCurrency(value) {
+        const num = Number(value);
+        if (Number.isNaN(num)) return String(value);
+        return new Intl.NumberFormat("en-US", {
+          style: "currency",
+          currency: "USD",
+        }).format(num);
+      }
+
+      function isBlank(value) {
+        return String(value ?? "").trim().length === 0;
+      }
+
+      // ===================== 2.1 Product Management =====================
+      const productForm = $("#productForm");
+      const productName = $("#productName");
+      const productPrice = $("#productPrice");
+      const productCategory = $("#productCategory");
+      const productTbody = $("#productTbody");
+      const productEmpty = $("#productEmpty");
+      const productMsg = $("#productMsg");
+
+      const DEFAULT_PRODUCTS = [
+        {
+          id: crypto.randomUUID(),
+          name: "iPhone 15",
+          price: 999,
+          category: "Electronics",
+          createdAt: new Date().toLocaleString(),
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "AirPods Pro",
+          price: 249,
+          category: "Accessories",
+          createdAt: new Date().toLocaleString(),
+        },
+        {
+          id: crypto.randomUUID(),
+          name: "MacBook Air",
+          price: 1299,
+          category: "Computers",
+          createdAt: new Date().toLocaleString(),
+        },
+      ];
+
+      let products = [...DEFAULT_PRODUCTS];
+
+      function renderProducts() {
+        productTbody.innerHTML = "";
+
+        if (products.length === 0) {
+          productEmpty.style.display = "block";
+          return;
+        }
+        productEmpty.style.display = "none";
+
+        const rowsHtml = products
+          .map(
+            (p) => `
+          <tr data-id="${p.id}">
+            <td>${escapeHtml(p.name)}</td>
+            <td>${toCurrency(p.price)}</td>
+            <td>${escapeHtml(p.category)}</td>
+            <td>${escapeHtml(p.createdAt)}</td>
+            <td>
+              <button class="btn btn-danger" type="button" data-action="delete">
+                Delete
+              </button>
+            </td>
+          </tr>
+        `
+          )
+          .join("");
+
+        productTbody.insertAdjacentHTML("beforeend", rowsHtml);
+      }
+
+      function clearProductInputs() {
+        productName.value = "";
+        productPrice.value = "";
+        productCategory.value = "";
+        productName.focus();
+      }
+
+      function escapeHtml(str) {
+        // prevent injection when rendering user input into table
+        return String(str)
+          .replaceAll("&", "&amp;")
+          .replaceAll("<", "&lt;")
+          .replaceAll(">", "&gt;")
+          .replaceAll('"', "&quot;")
+          .replaceAll("'", "&#039;");
+      }
+
+      productForm.addEventListener("submit", (e) => {
+        e.preventDefault();
+        hideMessage(productMsg);
+
+        const name = productName.value.trim();
+        const price = productPrice.value.trim();
+        const category = productCategory.value.trim();
+
+        // Requirement: if any input is empty -> do nothing
+        if (isBlank(name) || isBlank(price) || isBlank(category)) {
+          showMessage(productMsg, "Please fill out all fields.", "error");
+          return;
+        }
+
+        const priceNum = Number(price);
+        if (Number.isNaN(priceNum) || priceNum < 0) {
+          showMessage(productMsg, "Price must be a valid non-negative number.", "error");
+          return;
+        }
+
+        const newProduct = {
+          id: crypto.randomUUID(),
+          name,
+          price: priceNum,
+          category,
+          createdAt: new Date().toLocaleString(),
+        };
+
+        products.push(newProduct);
+        renderProducts();
+        clearProductInputs();
+        showMessage(productMsg, "Product added successfully.", "success");
+      });
+
+      // Event delegation for delete buttons
+      productTbody.addEventListener("click", (e) => {
+        const btn = e.target.closest("button[data-action='delete']");
+        if (!btn) return;
+
+        const row = btn.closest("tr");
+        const id = row?.dataset?.id;
+        if (!id) return;
+
+        products = products.filter((p) => p.id !== id);
+        renderProducts();
+      });
+
+      // ===================== 3.1 Part 1 Users Table =====================
+      const usersTbody = $("#usersTbody");
+      const usersMsg = $("#usersMsg");
+
+      function renderUsersTable(users) {
+        usersTbody.innerHTML = users
+          .map(
+            (u) => `
+          <tr>
+            <td>${u.id}</td>
+            <td>${escapeHtml(u.name)}</td>
+            <td>${escapeHtml(u.username)}</td>
+            <td>${escapeHtml(u.email)}</td>
+            <td>${escapeHtml(u.company?.name ?? "")}</td>
+          </tr>
+        `
+          )
+          .join("");
+      }
+
+      async function loadUsers() {
+        hideMessage(usersMsg);
+        try {
+          const data = await fetchJson("https://jsonplaceholder.typicode.com/users");
+          renderUsersTable(data);
+        } catch (err) {
+          showMessage(
+            usersMsg,
+            `Failed to load users. ${err?.message ?? "Unknown error"}`,
+            "error"
+          );
+          usersTbody.innerHTML = "";
+        }
+      }
+
+      // ===================== 3.2 Part 2 Search User + Posts + Todos =====================
+      const userIdInput = $("#userIdInput");
+      const searchBtn = $("#searchBtn");
+      const searchMsg = $("#searchMsg");
+
+      const userInfoList = $("#userInfoList");
+      const postsList = $("#postsList");
+      const todosList = $("#todosList");
+
+      function clearSearchResults() {
+        userInfoList.innerHTML = "";
+        postsList.innerHTML = "";
+        todosList.innerHTML = "";
+      }
+
+      function renderKeyValueList(listEl, obj) {
+        listEl.innerHTML = "";
+        const entries = Object.entries(obj);
+
+        if (entries.length === 0) {
+          listEl.innerHTML = `<li>(No data)</li>`;
+          return;
+        }
+
+        listEl.innerHTML = entries
+          .map(([k, v]) => `<li><b>${escapeHtml(k)}:</b> ${escapeHtml(v)}</li>`)
+          .join("");
+      }
+
+      function renderPosts(listEl, posts) {
+        listEl.innerHTML = "";
+        if (!Array.isArray(posts) || posts.length === 0) {
+          listEl.innerHTML = `<li>(No posts)</li>`;
+          return;
+        }
+
+        // Keep each post readable: show title + body
+        listEl.innerHTML = posts
+          .map(
+            (p) => `
+          <li>
+            <b>id:</b> ${p.id}<br />
+            <b>title:</b> ${escapeHtml(p.title)}<br />
+            <b>body:</b> ${escapeHtml(p.body)}
+          </li>
+        `
+          )
+          .join("");
+      }
+
+      function renderTodos(listEl, todos) {
+        listEl.innerHTML = "";
+        if (!Array.isArray(todos) || todos.length === 0) {
+          listEl.innerHTML = `<li>(No todos)</li>`;
+          return;
+        }
+
+        listEl.innerHTML = todos
+          .map(
+            (t) => `
+          <li>
+            <b>id:</b> ${t.id}<br />
+            <b>title:</b> ${escapeHtml(t.title)}<br />
+            <b>completed:</b> ${t.completed}
+          </li>
+        `
+          )
+          .join("");
+      }
+
+      function normalizeUserInfo(user) {
+        // Flatten only the most useful fields to keep “key: value” simple
+        return {
+          id: user.id ?? "",
+          name: user.name ?? "",
+          username: user.username ?? "",
+          email: user.email ?? "",
+          phone: user.phone ?? "",
+          website: user.website ?? "",
+          company: user.company?.name ?? "",
+          city: user.address?.city ?? "",
+          street: user.address?.street ?? "",
+        };
+      }
+
+      async function handleSearch() {
+        hideMessage(searchMsg);
+        clearSearchResults();
+
+        const raw = userIdInput.value.trim();
+        const id = Number(raw);
+
+        if (!raw || Number.isNaN(id) || id <= 0) {
+          showMessage(searchMsg, "Please enter a valid user ID (positive number).", "error");
+          userIdInput.value = "";
+          return;
+        }
+
+        const userUrl = `https://jsonplaceholder.typicode.com/users/${id}`;
+        const postsUrl = `https://jsonplaceholder.typicode.com/posts?userId=${id}`;
+        const todosUrl = `https://jsonplaceholder.typicode.com/todos?userId=${id}`;
+
+        try {
+          // Use allSettled to handle partial failures gracefully (best practice)
+          const [userRes, postsRes, todosRes] = await Promise.allSettled([
+            fetchJson(userUrl),
+            fetchJson(postsUrl),
+            fetchJson(todosUrl),
+          ]);
+
+          // user validation (jsonplaceholder returns {} if not found)
+          const user =
+            userRes.status === "fulfilled" ? userRes.value : null;
+
+          if (!user || !user.id) {
+            showMessage(
+              searchMsg,
+              "User was not found. Please try another user ID",
+              "error"
+            );
+            userIdInput.value = "";
+            return;
+          }
+
+          // Render user info
+          renderKeyValueList(userInfoList, normalizeUserInfo(user));
+
+          // Render posts / todos (if failed, show error blocks)
+          if (postsRes.status === "fulfilled") {
+            renderPosts(postsList, postsRes.value);
+          } else {
+            postsList.innerHTML = `<li>(Failed to load posts)</li>`;
+          }
+
+          if (todosRes.status === "fulfilled") {
+            renderTodos(todosList, todosRes.value);
+          } else {
+            todosList.innerHTML = `<li>(Failed to load todos)</li>`;
+          }
+
+          showMessage(searchMsg, `Loaded data for user ID ${id}.`, "success");
+        } catch (err) {
+          showMessage(
+            searchMsg,
+            `Unexpected error. ${err?.message ?? "Unknown error"}`,
+            "error"
+          );
+        }
+      }
+
+      searchBtn.addEventListener("click", handleSearch);
+
+      // Allow Enter key inside input to search
+      userIdInput.addEventListener("keydown", (e) => {
+        if (e.key === "Enter") handleSearch();
+      });
+
+      // ===================== 3.3 Part 3 delayedRequest(url) =====================
+      const delayUrlInput = $("#delayUrlInput");
+      const delayBtn = $("#delayBtn");
+      const delayMsg = $("#delayMsg");
+
+      function sleep(ms) {
+        return new Promise((resolve) => setTimeout(resolve, ms));
+      }
+
+      async function delayedRequest(
+        url = "https://jsonplaceholder.typicode.com/users/1"
+      ) {
+        // outputs json string data to the console after 2 seconds
+        await sleep(2000);
+        const data = await fetchJson(url);
+        console.log(JSON.stringify(data, null, " "));
+        return data;
+      }
+
+      delayBtn.addEventListener("click", async () => {
+        hideMessage(delayMsg);
+
+        const url = delayUrlInput.value.trim() || "https://jsonplaceholder.typicode.com/users/1";
+        showMessage(delayMsg, "Waiting …", "info");
+
+        try {
+          await delayedRequest(url);
+          showMessage(delayMsg, "Check console for the data", "success");
+        } catch (err) {
+          showMessage(
+            delayMsg,
+            `Failed to fetch data. ${err?.message ?? "Unknown error"}`,
+            "error"
+          );
+        }
+      });
+
+     
+      document.addEventListener("DOMContentLoaded", () => {
+        renderProducts();
+        loadUsers();
+      });
+    </script>
+  </body>
+</html>
