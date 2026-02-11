@@ -14,10 +14,8 @@ In JavaScript, this refers to the object that is currently calling the function.
 
 3. What does the event loop do? What data structures does it use?
 
-The event loop first checks if the call stack is empty.
-If it is, it takes one task from the macrotask queue and pushes it onto the call stack.
-After that task finishes, it runs all microtasks in the microtask queue.
-Then it repeats the process.
+Execute all synchronous code (call stack) -> Run all microtasks -> Execute one macrotask from macrotask queue (task queue/task queue) -> Repeat.
+先清空microtask queue里的任务，再去执行task queue里的任务
 
 4. What are closures?
 
@@ -34,6 +32,7 @@ Asynchronous code in JavaScript allows long-running tasks like network requests 
 6. What is async & await? How do we use them?
 
 Async and await are syntax sugar built on top of Promises that make asynchronous code look and behave more like synchronous code, making it easier to read and maintain.
+async is used to declare a function that returns a Promise, and await is used inside an async function to wait for a Promise to resolve, often with error handling using try/catch.
 
 7. How many HTTP methods are there? Explain each one.
 
