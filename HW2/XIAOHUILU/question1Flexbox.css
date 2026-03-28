@@ -1,0 +1,63 @@
+
+html,body{
+    height:100%;
+    margin: 0;
+}
+/* ===== container ===== */
+.container {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  height: 20%;
+}
+
+.middle {
+  height: 70%;
+  display: flex;
+}
+
+.footer {
+  height: 10%;
+}
+/* ===== colors ===== */
+.header {
+  background-color: #97c21f;
+}
+
+.footer {
+  background-color: yellow;
+}
+
+.nav, .aside {
+  background-color: #f3f6da;
+
+}
+
+.article {
+  background-color: white;
+}
+
+/* ===== text padding ===== */
+.header, .footer, .nav, .article, .aside {
+  padding: 20px;
+}
+
+/* ===== Flexbox layout ===== */
+.flex .middle {
+  display: flex;
+}
+
+.flex .nav {
+  width: 20%;
+}
+
+.flex .article {
+  width: 60%;
+}
+
+.flex .aside {
+  width: 20%;
+}
