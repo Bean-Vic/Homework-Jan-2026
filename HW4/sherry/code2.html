@@ -1,0 +1,71 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      .tbl-box {
+        border: 1px solid #bbbbbb;
+      }
+      .btn-group {
+        background-color: #f1f1f1;
+        border-bottom: 1px solid #bbbbbb;
+        display: flex;
+      }
+      .btn-group button {
+        border: none;
+        padding: 16px;
+        font-size: 16px;
+      }
+
+      .btn-group button.active {
+        background-color: gray;
+      }
+      .content.active {
+        display: block;
+        padding: 8px;
+      }
+
+      .content {
+        display: none;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="tbl-box">
+      <div class="btn-group">
+        <button class="active" data-city="london">London</button>
+        <button data-city="paris">Paris</button>
+        <button data-city="tokyo">Tokyo</button>
+      </div>
+      <div class="content london active">
+        <h2>London</h2>
+        <p>London is the capital city of England</p>
+      </div>
+      <div class="content paris">
+        <h2>Paris</h2>
+        <p>Paris is the capital of France.</p>
+      </div>
+      <div class="content tokyo">
+        <h2>Tokyo</h2>
+        <p>Tokyo is the capital of Japan.</p>
+      </div>
+    </div>
+  </body>
+  <script>
+    const buttons = document.querySelector(".btn-group");
+    buttons.addEventListener("click", (e) => {
+      if (e.target.tagName !== "BUTTON") return;
+      const city = e.target.dataset.city;
+      document
+        .querySelectorAll(".content")
+        .forEach((c) => c.classList.remove("active"));
+      document
+        .querySelectorAll("button")
+        .forEach((c) => c.classList.remove("active"));
+      document.querySelector(`.content.${city}`).classList.add("active");
+      e.target.classList.add("active");
+    });
+  </script>
+</html>
