@@ -1,0 +1,38 @@
+body {
+    margin: 0;
+    font-size: 1.5rem;
+    color: gray;
+}
+
+.page {
+    display: grid;
+    grid-template-rows: 15vh 1fr 10vh;
+    min-height: 100vh;
+}
+
+.main {
+    display: grid;
+    grid-template-columns: 20% 1fr 20%;
+    background-color: antiquewhite;
+}
+
+header {
+    background-color: greenyellow;
+    padding: 1rem;
+}
+
+footer {
+    background-color: yellow;
+    padding: 1rem;
+}
+
+
+nav,
+aside {
+  padding: 1rem;
+}
+
+article {
+  background-color: #fff;
+  padding: 1rem;
+}

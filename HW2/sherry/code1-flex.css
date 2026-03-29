@@ -1,0 +1,42 @@
+body {
+    color: gray;
+    margin: 0;
+    font-size: 1.5rem;
+}
+
+.page {
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    flex-grow: 1;
+    background-color:antiquewhite;
+}
+
+header {
+    background-color: greenyellow;
+    height: 15vh;
+    padding: 1rem;
+}
+
+
+footer {
+    background-color: yellow;
+    height: 10vh;
+    padding: 1rem;
+}
+
+nav, aside {
+    width: 20%;
+    padding: 1rem;
+}
+
+article {
+    background-color: #fff;
+    flex: 1;
+    padding: 1rem;
+}
