@@ -1,0 +1,100 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: white;
+    padding: 20px;
+}
+
+.container {
+    background-color: #f7f7f7;
+    padding: 20px;
+    border-radius: 5px;
+    max-width: 70%;
+    margin: 30px auto;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.1);
+}
+
+.button {
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background-color: #e7e7e7;
+    cursor: pointer;
+    margin-bottom: 5px;
+}
+
+.button:hover {
+    background-color: #d7d7d7;
+}
+
+#part1-users-table {
+      width: 100%;
+      border-collapse: collapse;
+}
+
+th, td {
+      border: 1px solid #ddd;
+      padding: 10px;
+      text-align: left;
+    }
+
+ th {
+      background-color: #f2f2f2;
+      font-weight: bold;
+}
+
+// ------------------------------------
+
+.status {
+    margin-top: 10px;
+    font-size: 14px;
+}
+
+.error {
+    color: #d93025;
+}
+
+.loading {
+    color: #555;
+}
+
+//part 2 styles
+.part2-controls {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-bottom: 18px;
+    }
+
+input[type="text"] {
+    width: 200px;
+    padding: 10px 15px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    margin-bottom: 25px;
+}
+
+.section-title {
+    margin: 0px 0 10px;
+    font-size: 18px;
+    font-weight: 800;
+    color: #333;
+}
+
+.status.error {
+     color: red; 
+     padding: 5px 0;
+     margin:10px 0;
+}
+.status.loading {
+     color: green; 
+     padding: 5px 0;
+     margin:10px 0;
+    }
+
+.item-card { 
+    margin: 10px 0; 
+    padding: 10px 12px; 
+    background: #fafafa; 
+    border: 1px solid #eee; 
+    border-radius: 6px; 
+}

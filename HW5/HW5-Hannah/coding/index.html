@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>HW5 - Hannah</title>
+        <link rel="stylesheet" href="index.css">
+    </head>
+    <body>
+        
+        <div class="container">
+            <h2>Part 1</h2>
+            <button class="button" id="part1-button">Load Users</button>
+            <table id="part1-users-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+                <tbody id="part1-users-table-body">
+                </tbody>
+            </table>
+        </div>
+
+      
+        <div class="container">
+            <h2>Part 2 </h2>
+            <div class="part2-controls">
+                <input type="text" id="part2-userID-input" placeholder="Enter User ID" inputmode="numeric">
+                <button class="button" id="part2-search-button">Search</button>
+            </div>
+
+            <div id="part2-status" class="part2-status status"></div>
+
+            <div class="section">
+                <div class="section-title">User Info</div>
+                <div id="part2-userInfo"></div>
+            </div>
+            <div class="section">
+                <div class="section-title">User Posts</div>
+                <div id="part2-userPosts"></div>
+            </div>
+            <div class="section">
+                <div class="section-title">User Todos</div>
+                <div id="part2-userTodos"></div>
+            </div>
+        </div>
+
+        <div class="container">
+            <h2>Part 3</h2>
+            <button class="button" id="part3-button">Send Delayed Request</button>
+            <div id="part3-response" class="part3-response"></div>
+        </div>
+
+
+        <div id="status" class="status"></div>
+        <script src="index.js"></script>
+    </body>
+</html>
