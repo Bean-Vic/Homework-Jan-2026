@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>HW5 - JavaScript 3</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <h1>HW5 - JavaScript 3</h1>
+
+    <!-- Part 1 -->
+    <section class="card">
+      <h2>Part 1: Load Users</h2>
+      <button id="loadUsersBtn">Load Users</button>
+      <p id="usersStatus" class="status"></p>
+
+      <div class="table-wrap">
+        <table id="usersTable">
+          <thead>
+            <tr>
+              <th>Id</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>City</th>
+            </tr>
+          </thead>
+          <tbody id="usersTbody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- Part 2 -->
+    <section class="card">
+      <h2>Part 2: Search User by ID</h2>
+
+      <form id="searchForm">
+        <label for="userIdInput">User ID:</label>
+        <input id="userIdInput" type="number" min="1" placeholder="e.g. 1" />
+        <button type="submit">Search</button>
+      </form>
+
+      <p id="searchStatus" class="status"></p>
+
+      <div class="grid">
+        <div class="box">
+          <h3>User</h3>
+          <pre id="userResult">No data</pre>
+        </div>
+        <div class="box">
+          <h3>Posts</h3>
+          <pre id="postsResult">No data</pre>
+        </div>
+        <div class="box">
+          <h3>Todos</h3>
+          <pre id="todosResult">No data</pre>
+        </div>
+      </div>
+    </section>
+
+    <!-- Part 3 -->
+    <section class="card">
+      <h2>Part 3: delayedRequest(url)</h2>
+
+      <div class="row">
+        <input
+          id="delayUrlInput"
+          type="text"
+          value="https://jsonplaceholder.typicode.com/todos/1"
+        />
+        <button id="delayBtn">Send Delayed Request</button>
+      </div>
+
+      <p id="delayStatus" class="status"></p>
+    </section>
+
+    <script src="./app.js"></script>
+  </body>
+</html>
