@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="A simple HTML template" />
+    <meta name="author" content="XIAOHUILU" />
+    <title>Registration Form</title>
+    
+</head>
+<body>
+    <h1>Community Workshop Registration</h1>
+    <p><em>Note: Please submit this form at least 14 days before your chosen session.</em></p>
+
+    <form>
+        <fieldset>
+        <legend>Personal Details</legend>
+            
+            <label>
+                Name:
+                <input type = "text" required placeholder="Your full name">
+            </label><br></br>
+            
+            <label>
+                Address:
+                <input type = "text" required placeholder="Street, City, State">
+            </label><br></br>
+        
+            <div>
+                <label>
+                Email:
+                <input type = "email" required placeholder="you@example.com">
+                </label><br></br>    
+            </div>
+
+            <div>
+                <label>
+                Phone Number:
+                <input type = "tel" required placeholder="123-456-7890">
+                </label><br></br>
+            </div>
+
+            <div>
+                <label>
+                Age:
+                <input type = "number" required placeholder="0">
+                </label><br></br>
+            </div>
+
+            <div>
+                <label>
+                Gender:
+                </label><br></br>
+                <div>
+                    <input id="male" name="gender" type="radio" value="Male" />
+                    <label for="male">Male</label>
+                </div>
+                <div>
+                    <input id="female" name="gender" type="radio" value="Female" />
+                    <label for="female">Female</label>
+                </div>
+                <div>
+                    <input id="other" name="gender" type="radio" value="Other" />
+                    <label for="other">Other</label>
+                </div>
+            </div>
+        </fieldset>    
+    </form>    
+    
+    <form>
+        <fieldset>
+            <legend>Workshop Preferences</legend>
+
+            <label for="sessionDate">Preferred Session Date:</label>
+            <input type="date" id="sessionDate" name="sessionDate">
+            <br><br>
+            
+            <label for = "tshirtsize">T-shirt Size:</label>
+            <select name="tshirt" id="tshirtsize">
+                <option value="">Select size</option>
+                <option value="XS">XS</option>
+                <option value="S">S</option>
+                <option value="M">M</option>
+                <option value="L">L</option>
+                <option value="XL">XL</option>
+            </select>
+            <br><br>
+            
+            <label for = "explevel">Experience Level:</label>
+            <select name="explevel" id="explevel">
+                <option value="">Select level</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+            </select>
+            <br></br>
+
+            Check all that apply
+            <br><br>
+
+            <input type="checkbox" name="preference" id="vegetarian" value="vegetarian">
+            <label for="vegetarian">Vegetarian</label>
+            <br>
+
+            <input type="checkbox" name="assistance" id="assistance" value="vassistance">
+            <label for="assistance">Require special assistance</label>
+            <br>
+
+            <input type="checkbox" id="previous" name="preferences" value="Have previous workshop experience">
+            <label for="previous">Have previous workshop experience</label>
+            <br>
+
+            <input type="checkbox" id="weekdays" name="preferences" value="Available on weekdays">
+            <label for="weekdays">Available on weekdays</label>
+            <br>
+
+            <input type="checkbox" id="weekends" name="preferences" value="Available on weekends">
+            <label for="weekends">Available on weekends</label>
+            <br><br>
+        </fieldset>
+    </form>
+
+    <form>
+        <fieldset>
+            <legend>Additional Information</legend>
+            <label for="interest">Why are you interested in this workshop?</label>
+            <br>
+            <textarea id="interest" name="interest" rows="5" cols="55" placeholder="Tell us in 50 words or more"></textarea>
+            <br><br>
+
+            <label for="skills">List any relevant skills or experience:</label>
+            <br>
+            <textarea id="skills" name="skills" rows="5" cols="55" placeholder="e.g., woodworking, painting, coding"></textarea>
+            <br><br>
+
+            <label for="proof">Upload Proof of Residency &amp; ID:</label>
+            <input type="file" id="proof" name="proof">
+            <br><br>
+        </fieldset>
+    </form>
+    <hr>
+    <h2>Available Workshop Sessions</h2>
+
+    <table border="1" cellpadding="10">
+        <caption>June 2025 Workshop Schedule</caption>
+        <tr>
+            <th>Date</th>
+            <th>Time</th>
+            <th>Topic</th>
+        </tr>
+        <tr>
+            <td>June 3, 2025</td>
+            <td>10:00 AM - 1:00 PM</td>
+            <td>Introduction to Pottery</td>
+        </tr>
+        <tr>
+            <td>June 10, 2025</td>
+            <td>2:00 PM - 5:00 PM</td>
+            <td>Basic Woodworking</td>
+        </tr>
+        <tr>
+            <td>June 17, 2025</td>
+            <td>9:00 AM - 12:00 PM</td>
+            <td>Watercolor Painting</td>
+        </tr>
+        <tr>
+            <td>June 24, 2025</td>
+            <td>1:00 PM - 4:00 PM</td>
+            <td>Intro to Coding</td>
+        </tr>
+    </table>
+    <hr>
+    <br>
+    <a href="https://example.com/">Visit our Community Hub</a>
+    <br>
+    <hr>
+    
+    <input type="submit" value="Submit Registration" >
+</body>
+</html>
