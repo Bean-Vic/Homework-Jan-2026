@@ -1,0 +1,82 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+  </head>
+  <style>
+    .tabs {
+      width: 400px;
+      border: 1px solid #ccc;
+      font-family: Arial, sans-serif;
+    }
+    .tab {
+      padding: 12px 24px;
+      border: none;
+
+      cursor: pointer;
+      font-size: 16px;
+    }
+
+    .tab.active {
+      background: #ccc;
+      font-weight: bold;
+    }
+    .tab-buttons {
+      display: flex;
+      background: #f1f1f1;
+      border-bottom: 1px solid #ccc;
+    }
+    .tab-content {
+      display: none;
+      padding: 24px;
+    }
+    .tab-content.active {
+      display: block;
+    }
+  </style>
+  <body>
+    <div class="tabs">
+      <div class="tab-buttons">
+        <button class="tab active" data-tab="london">London</button>
+        <button class="tab" data-tab="paris">Paris</button>
+        <button class="tab" data-tab="tokyo">Tokyo</button>
+      </div>
+      <div id="london" class="tab-content active">
+        <h2>London</h2>
+        <p>London is the capital city of England</p>
+      </div>
+      <div id="paris" class="tab-content">
+        <h2>Paris</h2>
+        <p>Paris is the capital of France.</p>
+      </div>
+      <div id="tokyo" class="tab-content">
+        <h2>Tokyo</h2>
+        <p>Tokyo is the capital of Japan.</p>
+      </div>
+    </div>
+    <script>
+      const tabBtns = document.querySelector(".tab-buttons");
+
+      tabBtns.addEventListener("click", (e) => {
+        const btn = e.target.closest(".tab");
+        if (!btn) return;
+
+        const container = btn.closest(".tabs");
+        const tabs = container.querySelectorAll(".tab");
+        const contents = container.querySelectorAll(".tab-content");
+
+        const id = btn.dataset.tab;
+
+        // 移除所有 active
+        tabs.forEach((t) => t.classList.remove("active"));
+        contents.forEach((c) => c.classList.remove("active"));
+
+        // 激活当前
+        btn.classList.add("active");
+        container.querySelector("#" + id).classList.add("active");
+      });
+    </script>
+  </body>
+</html>
