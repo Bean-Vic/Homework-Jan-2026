@@ -1,0 +1,56 @@
+/* HW7 - random dog image fetch - randomDog.css */
+.hw7-card {
+    box-sizing: border-box;
+    border: 15px ridge lightgrey;
+    padding: 20px;
+    width: 100%;
+    max-width: 520px;
+    margin: 0 auto;
+    background: white;
+    text-align: center;
+}
+
+.hw7-title {
+    margin: 0 0 12px;
+    font-weight: bold;
+    font-size: 20px;
+}
+
+.hw7-btn {
+    border: 5px outset darkgrey;
+    border-radius: 5px;
+    padding: 10px 12px;
+    background: lightslategrey;
+    cursor: pointer;
+    color: white;
+    font-weight: bold;
+
+}
+
+.hw7-imageContainer {
+    margin: 20px auto;
+    height: 260px;
+    width: 100%;
+    max-width: 420px;
+    border: none;
+    display: grid;
+    place-items: center;
+    overflow: hidden;
+}
+
+.hw7-image {
+    color: #6b7280;
+    margin: 0;
+}
+
+.hw7-dogImg {
+    max-width: 100%;
+    max-height: 100%;
+    object-fit: contain;
+    display: block;
+}
+
+.hw7-error {
+    margin-top: 10px;
+    font-weight: 600;
+}
